@@ -64,4 +64,5 @@ public class BlogController {
         postService.removePost(id);
         return "redirect:" + Mappings.HOME;
     }
+    
 }
