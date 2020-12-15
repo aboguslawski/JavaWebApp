@@ -3,17 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>add</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
-add post
-    <div>
+    add post
         <form action="#" th:action="@{/addPost}" th:object="${post}" method="post">
-            <p>Id: <input type="text" th:field="*{id}"/></p>
+
+            <div th:if="${#fields.hasErrors()}">
+              <span class="validationError">
+                 Please correct the problems below and resubmit.
+              </span>
+            </div>
+
+            <p>Id:</p>
+            <input type="text" th:field="*{id}"/>
+            <span class="validationError"
+                    th:if="${#fields.hasErrors('id')}"
+                    th:errors="*{id}">Id Error
+            </span>
+
             <p>Author: <input type="text" th:field="*{user}"/></p>
+            <span class="validationError"
+                    th:if="${#fields.hasErrors('user')}"
+                    th:errors="*{user}">User Error
+            </span>
+
             <p>Content: <textarea th:field="*{content}"></textarea></p>
+            <span class="validationError"
+                    th:if="${#fields.hasErrors('content')}"
+                    th:errors="*{content}">Content Error
+            </span>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
-    </div>
+
 
 </body>
 </html>

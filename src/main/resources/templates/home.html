@@ -11,7 +11,9 @@
 </head>
 <body>
     <div>
-        <h1>Blog</h1>
+        <h1>
+            We have <a th:text="${count}"/> posts
+        </h1>
 
         <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
            th:text="add"
