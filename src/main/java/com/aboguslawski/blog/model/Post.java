@@ -18,4 +18,10 @@ public class Post {
         this.user = user;
         this.content = content;
     }
+
+    public Post() {
+        id = 0;
+        user = "no user";
+        content = "no content";
+    }
 }

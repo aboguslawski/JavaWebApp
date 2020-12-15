@@ -36,15 +36,16 @@ public class BlogController {
     }
 
     @GetMapping(Mappings.ADD_POST)
-    public String addPost(){
+    public String addPost(Model model){
+        model.addAttribute("post", new Post());
         return ViewNames.ADD_POST;
     }
 
     @PostMapping(Mappings.ADD_POST)
-    public String processItem(@ModelAttribute(AttributeNames.POST) Post post){
-
+    public String processItem(@ModelAttribute(AttributeNames.POST) Post post, Model model){
+        model.addAttribute("post", post);
         postService.addPost(post);
 
-        return "redirect:/" + Mappings.HOME;
+        return "redirect:/";
     }
 }
