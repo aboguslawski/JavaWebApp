@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+    <div>
+        <h1>Blog</h1>
+
+        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
+           th:text="add"
+           href="add_post.html">
+            add post
+        </a>
+
+        <ul th:each="post : ${postsList}">
+            <li>
+                <p th:text="${post.user}"/>
+                <a th:text="${post.content}"/>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
