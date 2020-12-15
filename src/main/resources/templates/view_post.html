@@ -6,6 +6,12 @@
 </head>
 <body>
     <p th:text="${post.user}"/>
-    <a th:text="${post.content}"/>
+    <p th:text="${post.content}"/>
+
+    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${post.id})}"
+       th:text="delete"
+       href="view_post.html">
+        delete post
+    </a>
 </body>
 </html>
