@@ -1,36 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        table, th, td {
-          border: 1px solid black;
-        }
-    </style>
     <meta charset="UTF-8">
     <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+
 </head>
 <body>
     <div>
-        <h1>
-            We have <a th:text="${count}"/> posts
-        </h1>
+        <div class="hd" align="center">
+            <h1>
+                we have <a th:text="${count}"/> posts
+            </h1>
+        </div>
 
-        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
-           th:text="add"
-           href="add_post.html">
-            add post
-        </a>
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn"
+                   th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
+                   th:text="add_new_post"
+                   href="add_post.html">
+                    add post
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn"
+                   th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
+                   th:text="add"
+                   href="add_post.html">
+                    add post
+                </a>
+            </div>
+
+        </div>
+
 
         <ul th:each="post : ${postsList}">
-            <li>
-                <p th:text="${post.user}"/>
-                <a th:text="${post.content}"/>
-                <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${post.id})}"
-                   th:text="view"
-                   href="view_post.html">
-                    view post
-                </a>
-            </li>
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="box" align="center">
+                        <p th:text="${post.user}"/>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="box">
+                        <a th:text="${post.content}"/>
+                    </div>
+                </div>
+                <div align="center" class="col-md-1">
+                    <div class="box">
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${post.id})}"
+                           th:text="view"
+                           href="view_post.html">
+                            view post
+                        </a>
+
+                    </div>
+                </div>
+            </div>
         </ul>
     </div>
 

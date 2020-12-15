@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>view</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
-    <p th:text="${post.user}"/>
-    <p th:text="${post.content}"/>
+    <div class="hd" align="center">
+        <h1>
+            view
+        </h1>
+    </div>
 
-    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${post.id})}"
-       th:text="delete"
-       href="view_post.html">
-        delete post
-    </a>
-    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${post.id})}"
-       th:text="edit"
-       href="edit_post.html">
-        edit post
-    </a>
+    <div class="pd">
+        <p class="box" th:text="${post.user}"/>
+        <p class="box" th:text="${post.content}"/>
+
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${post.id})}"
+           th:text="delete"
+           href="view_post.html">
+            delete post
+        </a>
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${post.id})}"
+           th:text="edit"
+           href="edit_post.html">
+            edit post
+        </a>
+
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__(id=${post.id})}">
+            return
+        </a>
+    </div>
 </body>
 </html>
