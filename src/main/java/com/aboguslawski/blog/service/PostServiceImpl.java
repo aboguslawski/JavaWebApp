@@ -29,7 +29,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void UpdatePost(Post post) {
+    public void updatePost(Post post) {
         postData.updatePost(post);
     }
 

@@ -11,7 +11,7 @@ public interface PostService {
 
     Post getPost(int id);
 
-    void UpdatePost(Post post);
+    void updatePost(Post post);
 
     PostData getPostData();
 }

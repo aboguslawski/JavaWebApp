@@ -39,13 +39,13 @@ public class BlogController {
 
     @GetMapping(Mappings.ADD_POST)
     public String addPost(Model model) {
-        model.addAttribute("post", new Post());
+        model.addAttribute(AttributeNames.POST, new Post());
         return ViewNames.ADD_POST;
     }
 
     @PostMapping(Mappings.ADD_POST)
     public String processPost(@ModelAttribute(AttributeNames.POST) Post post, Model model) {
-        model.addAttribute("post", post);
+        model.addAttribute(AttributeNames.POST, post);
         postService.addPost(post);
 
         return "redirect:" + Mappings.HOME;
@@ -60,9 +60,23 @@ public class BlogController {
     }
 
     @GetMapping(Mappings.DELETE_POST)
-    public String removePost(@RequestParam int id){
+    public String removePost(@RequestParam int id) {
         postService.removePost(id);
         return "redirect:" + Mappings.HOME;
     }
-    
+
+    @GetMapping(Mappings.EDIT_POST)
+    public String editPost(@RequestParam int id, Model model){
+        Post post = postService.getPost(id);
+        model.addAttribute(AttributeNames.POST, post);
+        return ViewNames.EDIT_POST;
+    }
+
+    @PostMapping(Mappings.EDIT_POST)
+    public String processEdit(@ModelAttribute(AttributeNames.POST) Post post, Model model){
+        log.info("updated post with id " + post.getId() + ". new content: " + post.getContent());
+        model.addAttribute(AttributeNames.POST, post);
+        postService.updatePost(post);
+        return "redirect:" + Mappings.HOME;
+    }
 }

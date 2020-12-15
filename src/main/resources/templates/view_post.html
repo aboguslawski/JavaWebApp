@@ -13,5 +13,10 @@
        href="view_post.html">
         delete post
     </a>
+    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${post.id})}"
+       th:text="edit"
+       href="edit_post.html">
+        edit post
+    </a>
 </body>
 </html>
