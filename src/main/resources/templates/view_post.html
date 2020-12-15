@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>view</title>
 </head>
 <body>
-view
+    <p th:text="${post.user}"/>
+    <a th:text="${post.content}"/>
 </body>
 </html>

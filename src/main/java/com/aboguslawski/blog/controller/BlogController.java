@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -28,6 +29,10 @@ public class BlogController {
         this.postService = postService;
     }
 
+
+
+
+
     // == request methods ==
     @GetMapping(Mappings.HOME)
     public String listPosts(Model model) {
@@ -42,10 +47,18 @@ public class BlogController {
     }
 
     @PostMapping(Mappings.ADD_POST)
-    public String processItem(@ModelAttribute(AttributeNames.POST) Post post, Model model){
+    public String processPost(@ModelAttribute(AttributeNames.POST) Post post, Model model){
         model.addAttribute("post", post);
         postService.addPost(post);
 
-        return "redirect:/";
+        return "redirect:" + Mappings.HOME;
+    }
+
+    @GetMapping(Mappings.VIEW_POST)
+    public String viewPost(@RequestParam int id, Model model){
+        Post post = postService.getPost(id);
+        model.addAttribute(AttributeNames.POST, post);
+
+        return ViewNames.VIEW_POST;
     }
 }

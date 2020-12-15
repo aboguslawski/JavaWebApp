@@ -23,6 +23,11 @@
             <li>
                 <p th:text="${post.user}"/>
                 <a th:text="${post.content}"/>
+                <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${post.id})}"
+                   th:text="view"
+                   href="view_post.html">
+                    view post
+                </a>
             </li>
         </ul>
     </div>
