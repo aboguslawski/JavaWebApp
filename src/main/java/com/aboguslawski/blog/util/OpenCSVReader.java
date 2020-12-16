@@ -2,7 +2,9 @@ package com.aboguslawski.blog.util;
 
 import com.aboguslawski.blog.model.Post;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -30,6 +32,17 @@ public class OpenCSVReader {
 
             sourceList.add(new Post(postId, postUser, postContent));
         }
+    }
+
+    public static void addPost(Post post) throws IOException{
+        CSVWriter writer = new CSVWriter(new FileWriter(POSTS_PATH, true));
+
+        String[] record = (post.getId() + "," + post.getUser() + "," + post.getContent()).split(",");
+
+        writer.writeNext(record);
+
+        writer.close();
+
     }
 
 }

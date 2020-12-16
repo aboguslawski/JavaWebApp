@@ -31,11 +31,17 @@ public class PostData {
 
     // == public methods ==
     public List<Post> getPosts() {
-        return Collections.unmodifiableList(posts);
+        return posts;
     }
 
     public void addPost(@NonNull Post post) {
         posts.add(post);
+        try{
+            OpenCSVReader.addPost(post);
+            log.info("added post of " + post.getUser());
+        }catch (IOException e){
+            log.info("post couldn't be added to database");
+        }
     }
 
     public void removePost(int id) {

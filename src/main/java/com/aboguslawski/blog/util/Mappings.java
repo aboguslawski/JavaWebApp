@@ -8,6 +8,7 @@ public final class Mappings {
     public static final String VIEW_POST = "viewPost";
     public static final String DELETE_POST = "deletePost";
     public static final String EDIT_POST = "editPost";
+    public static final String SEARCH = "search";
 
     // == constructors ==
     private Mappings() {

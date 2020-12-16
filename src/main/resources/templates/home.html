@@ -15,28 +15,41 @@
     <div>
         <div class="hd" align="center">
             <h1>
-                we have <a th:text="${count}"/> posts
+                displayed <a th:text="${count}"/> posts
             </h1>
         </div>
 
         <div class="row">
-            <div class="col-md-1">
-                <a class="btn"
-                   th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
-                   th:text="add_new_post"
-                   href="add_post.html">
-                    add post
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a class="btn"
-                   th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
-                   th:text="add"
-                   href="add_post.html">
-                    add post
-                </a>
+
+            <div class="col-md-2">
+                <div class="pd">
+                     <a class="box2"
+                         th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
+                         th:text="add_new_post"
+                         href="add_post.html">
+                         add post
+                     </a>
+                </div>
             </div>
 
+            <div class="col-md-8">
+                <form action="#" th:action="@{/search}" th:object="${post}" method="post">
+                    <div class="pd">
+                        <input type="hidden" th:field="*{id}"/>
+                        <a>User: <input class="box2" type="text" th:field="*{user}"/> </a>
+                        <a>Content: <input class="box2" type="text" th:field="*{content}"/> </a>
+                        <a><input class="box2" type="submit" value="search"/> </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-2">
+                <form action="#" th:action="@{/}" method="post">
+                    <div class="pd">
+                        <a><input class="box2" type="submit" value="sort"/> </a>
+                    </div>
+                </form>
+            </div>
         </div>
 
 
