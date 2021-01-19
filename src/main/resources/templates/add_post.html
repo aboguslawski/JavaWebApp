@@ -32,10 +32,10 @@
                       th:if="${#fields.hasErrors('id')}"
                       th:errors="*{id}">Id Error
                     </span>
-                <p>Author: <input type="text" th:field="*{user}"/></p>
+                <p>Author: <input type="text" th:field="*{usr}"/></p>
                 <span class="validationError"
-                        th:if="${#fields.hasErrors('user')}"
-                        th:errors="*{user}">User Error
+                        th:if="${#fields.hasErrors('usr')}"
+                        th:errors="*{usr}">User Error
                 </span>
 
                 <p>Content: <textarea th:field="*{content}"></textarea></p>

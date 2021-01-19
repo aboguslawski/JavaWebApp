@@ -1,17 +1,17 @@
 package com.aboguslawski.blog.service;
 
-import com.aboguslawski.blog.model.User;
+import com.aboguslawski.blog.model.Usr;
 import com.aboguslawski.blog.model.UserData;
 
 public interface UserService {
 
-    void addUser(User user);
+    void addUser(Usr usr);
 
     void removeUser(int id);
 
-    User getUser(int id);
+    Usr getUser(int id);
 
-    void updateUser(User user);
+    void updateUser(Usr usr);
 
     UserData getUserData();
 

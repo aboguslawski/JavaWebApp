@@ -11,7 +11,7 @@ public class UserData {
 
     // == fields ==
     private static int idVal = 1;
-    private final List<User> users = new ArrayList<>();
+    private final List<Usr> usrs = new ArrayList<>();
 
     // == constructors ==
     public UserData(){
@@ -19,31 +19,31 @@ public class UserData {
     }
 
     // == public methods ==
-    public List<User> getUsers(){
-        return Collections.unmodifiableList(users);
+    public List<Usr> getUsrs(){
+        return Collections.unmodifiableList(usrs);
     }
 
-    public void addUser(@NonNull User user){
-        user.setId(idVal);
-        users.add(user);
+    public void addUser(@NonNull Usr usr){
+        usr.setId(idVal);
+        usrs.add(usr);
         idVal++;
     }
 
     public void removeUser(int id){
-        ListIterator<User> userIterator = users.listIterator();
+        ListIterator<Usr> userIterator = usrs.listIterator();
 
         while (userIterator.hasNext()) {
-            User user = userIterator.next();
+            Usr usr = userIterator.next();
 
-            if (user.getId() == id) {
+            if (usr.getId() == id) {
                 userIterator.remove();
                 break;
             }
         }
     }
 
-    public User getUser(int id){
-        for(User u : users){
+    public Usr getUser(int id){
+        for(Usr u : usrs){
             if(u.getId() == id){
                 return u;
             }
@@ -51,13 +51,13 @@ public class UserData {
         return null;
     }
 
-    public void updateUser(@NonNull User toUpdate){
-        ListIterator<User> userIterator = users.listIterator();
+    public void updateUser(@NonNull Usr toUpdate){
+        ListIterator<Usr> userIterator = usrs.listIterator();
 
         while(userIterator.hasNext()){
-            User user = userIterator.next();
+            Usr usr = userIterator.next();
 
-            if(user.equals(toUpdate)){
+            if(usr.equals(toUpdate)){
                 userIterator.set(toUpdate);
                 break;
             }

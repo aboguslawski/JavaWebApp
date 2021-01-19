@@ -36,7 +36,7 @@
                 <form action="#" th:action="@{/search}" th:object="${post}" method="post">
                     <div class="pd">
                         <input type="hidden" th:field="*{id}"/>
-                        <a>User: <input class="box2" type="text" th:field="*{user}"/> </a>
+                        <a>User: <input class="box2" type="text" th:field="*{usr}"/> </a>
                         <a>Content: <input class="box2" type="text" th:field="*{content}"/> </a>
                         <a><input class="box2" type="submit" value="search"/> </a>
                     </div>
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-md-1">
                     <div class="box" align="center">
-                        <p th:text="${post.user}"/>
+                        <p th:text="${post.usr}"/>
                     </div>
                 </div>
                 <div class="col-md-9">

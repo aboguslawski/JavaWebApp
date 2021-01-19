@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(of = "id")
-public class User {
+public class Usr {
 
     // == fields ==
     private int id;
@@ -16,7 +16,7 @@ public class User {
 //    private static List<User> users = new ArrayList<>();
 
     // == constructors ==
-    public User(String name) {
+    public Usr(String name) {
         this.name = name;
     }
 

@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.service;
 
-import com.aboguslawski.blog.model.User;
+import com.aboguslawski.blog.model.Usr;
 import com.aboguslawski.blog.model.UserData;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService{
     // == public methods ==
 
     @Override
-    public void addUser(User user) {
-        userData.addUser(user);
+    public void addUser(Usr usr) {
+        userData.addUser(usr);
     }
 
     @Override
@@ -25,12 +25,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUser(int id) {
+    public Usr getUser(int id) {
         return userData.getUser(id);
     }
 
     @Override
-    public void updateUser(User user) {
-        userData.updateUser(user);
+    public void updateUser(Usr usr) {
+        userData.updateUser(usr);
     }
 }
