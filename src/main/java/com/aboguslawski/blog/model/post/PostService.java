@@ -12,6 +12,12 @@ public class PostService {
 
     private final PostRepo postRepo;
 
+    public String save(Post post){
+        postRepo.save(post);
+
+        return "post saved to repository";
+    }
+
     public String addPost(Post post, List<User> authors){
         postRepo.save(post);
 

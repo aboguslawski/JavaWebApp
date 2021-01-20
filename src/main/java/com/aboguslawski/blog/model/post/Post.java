@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +47,13 @@ public class Post {
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
+    private LocalDateTime publicatedAt;
+
     public Post(String title, String content) {
         this.title = title;
         this.content = content;
         this.authors = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.publicatedAt = LocalDateTime.now();
     }
 }
