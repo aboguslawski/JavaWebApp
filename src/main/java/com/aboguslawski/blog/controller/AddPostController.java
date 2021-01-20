@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.controller;
 
-import com.aboguslawski.blog.model.Post;
+import com.aboguslawski.blog.model.OldPost;
 import com.aboguslawski.blog.service.PostService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
@@ -32,17 +32,17 @@ public class AddPostController {
 
     @GetMapping(Mappings.ADD_POST)
     public String addPost(Model model) {
-        model.addAttribute(AttributeNames.POST, new Post());
+        model.addAttribute(AttributeNames.POST, new OldPost());
         return ViewNames.ADD_POST;
     }
 
     @PostMapping(Mappings.ADD_POST)
-    public String processPost(@Valid Post post, Errors errors) {
+    public String processPost(@Valid OldPost oldPost, Errors errors) {
         if (errors.hasErrors()) {
             return ViewNames.ADD_POST;
         }
 
-        postService.addPost(post);
+        postService.addPost(oldPost);
 
         return "redirect:" + Mappings.HOME;
     }

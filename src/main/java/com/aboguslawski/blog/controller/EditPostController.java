@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.controller;
 
-import com.aboguslawski.blog.model.Post;
+import com.aboguslawski.blog.model.OldPost;
 import com.aboguslawski.blog.service.PostService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
@@ -29,8 +29,8 @@ public class EditPostController {
     // == methods ==
     @GetMapping(Mappings.VIEW_POST)
     public String viewPost(@RequestParam int id, Model model) {
-        Post post = postService.getPost(id);
-        model.addAttribute(AttributeNames.POST, post);
+        OldPost oldPost = postService.getPost(id);
+        model.addAttribute(AttributeNames.POST, oldPost);
 
         return ViewNames.VIEW_POST;
     }
@@ -43,16 +43,16 @@ public class EditPostController {
 
     @GetMapping(Mappings.EDIT_POST)
     public String editPost(@RequestParam int id, Model model) {
-        Post post = postService.getPost(id);
-        model.addAttribute(AttributeNames.POST, post);
+        OldPost oldPost = postService.getPost(id);
+        model.addAttribute(AttributeNames.POST, oldPost);
         return ViewNames.EDIT_POST;
     }
 
     @PostMapping(Mappings.EDIT_POST)
-    public String processEdit(@ModelAttribute(AttributeNames.POST) Post post, Model model) {
-        log.info("updated post with id " + post.getId() + ". new content: " + post.getContent());
-        model.addAttribute(AttributeNames.POST, post);
-        postService.updatePost(post);
+    public String processEdit(@ModelAttribute(AttributeNames.POST) OldPost oldPost, Model model) {
+        log.info("updated post with id " + oldPost.getId() + ". new content: " + oldPost.getContent());
+        model.addAttribute(AttributeNames.POST, oldPost);
+        postService.updatePost(oldPost);
         return "redirect:" + Mappings.HOME;
     }
 }

@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
      *   3. Account is enabled by executing proper GET request with generated token as argument.*/
     public String singUpUser(User user) {
 
-        /* Check if email is available.*/
+        /* Check if email is already taken.*/
         boolean userExists = userRepo
                 .findByEmail(user.getEmail())
                 .isPresent();

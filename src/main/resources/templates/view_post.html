@@ -18,21 +18,21 @@
     </div>
 
     <div class="pd">
-        <p class="box" th:text="${post.usr}"/>
-        <p class="box" th:text="${post.content}"/>
+        <p class="box" th:text="${oldPost.usr}"/>
+        <p class="box" th:text="${oldPost.content}"/>
 
-        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${post.id})}"
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${oldPost.id})}"
            th:text="delete"
            href="view_post.html">
-            delete post
+            delete oldPost
         </a>
-        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${post.id})}"
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${oldPost.id})}"
            th:text="edit"
            href="edit_post.html">
-            edit post
+            edit oldPost
         </a>
 
-        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__(id=${post.id})}">
+        <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__(id=${oldPost.id})}">
             return
         </a>
     </div>

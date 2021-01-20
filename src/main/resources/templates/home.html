@@ -27,13 +27,13 @@
                          th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
                          th:text="add_new_post"
                          href="add_post.html">
-                         add post
+                         add oldPost
                      </a>
                 </div>
             </div>
 
             <div class="col-md-8">
-                <form action="#" th:action="@{/search}" th:object="${post}" method="post">
+                <form action="#" th:action="@{/search}" th:object="${oldPost}" method="oldPost">
                     <div class="pd">
                         <input type="hidden" th:field="*{id}"/>
                         <a>User: <input class="box2" type="text" th:field="*{usr}"/> </a>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="col-md-2">
-                <form action="#" th:action="@{/}" method="post">
+                <form action="#" th:action="@{/}" method="oldPost">
                     <div class="pd">
                         <a><input class="box2" type="submit" value="sort"/> </a>
                     </div>
@@ -53,24 +53,24 @@
         </div>
 
 
-        <ul th:each="post : ${postsList}">
+        <ul th:each="oldPost : ${postsList}">
             <div class="row">
                 <div class="col-md-1">
                     <div class="box" align="center">
-                        <p th:text="${post.usr}"/>
+                        <p th:text="${oldPost.usr}"/>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="box">
-                        <a th:text="${post.content}"/>
+                        <a th:text="${oldPost.content}"/>
                     </div>
                 </div>
                 <div align="center" class="col-md-1">
                     <div class="box">
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${post.id})}"
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${oldPost.id})}"
                            th:text="view"
                            href="view_post.html">
-                            view post
+                            view oldPost
                         </a>
 
                     </div>

@@ -18,15 +18,15 @@
     </div>
 
     <div class="pd">
-        <p th:text="${post.usr}"/>
-        <form action="#" th:action="@{/editPost}" th:object="${post}" method="post">
+        <p th:text="${oldPost.usr}"/>
+        <form action="#" th:action="@{/editPost}" th:object="${oldPost}" method="oldPost">
             <p> <input type="hidden" th:field="*{id}"/></p>
             <p> <input type="hidden" th:field="*{usr}"/></p>
             <p> <textarea th:field="*{content}"></textarea></p>
             <p>
                 <input type="submit" value="submit" />
                 <input type="reset" value="reset" />
-                <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${post.id})}">
+                <a class="btn" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${oldPost.id})}">
                     return
                 </a>
             </p>

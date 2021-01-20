@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.util;
 
-import com.aboguslawski.blog.model.Post;
+import com.aboguslawski.blog.model.OldPost;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -15,7 +15,7 @@ public class OpenCSVReader {
 
     private static final String POSTS_PATH = "C:\\Users\\Adam Bogusławski\\Desktop\\Programowanie\\Java\\blog\\src\\main\\resources\\OnePosts.csv";
 
-    public static void postsData(List<Post> sourceList) throws IOException {
+    public static void postsData(List<OldPost> sourceList) throws IOException {
         int postId;
         String postUser;
         String postContent;
@@ -30,14 +30,14 @@ public class OpenCSVReader {
             postUser = nextRecord[1];
             postContent = nextRecord[2];
 
-            sourceList.add(new Post(postId, postUser, postContent));
+            sourceList.add(new OldPost(postId, postUser, postContent));
         }
     }
 
-    public static void addPost(Post post) throws IOException{
+    public static void addPost(OldPost oldPost) throws IOException{
         CSVWriter writer = new CSVWriter(new FileWriter(POSTS_PATH, true));
 
-        String[] record = (post.getId() + "," + post.getUser() + "," + post.getContent()).split(",");
+        String[] record = (oldPost.getId() + "," + oldPost.getUser() + "," + oldPost.getContent()).split(",");
 
         writer.writeNext(record);
 

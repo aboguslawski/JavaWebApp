@@ -1,23 +1,23 @@
 package com.aboguslawski.blog.service;
 
-import com.aboguslawski.blog.model.Post;
-import com.aboguslawski.blog.model.PostData;
+import com.aboguslawski.blog.model.OldPost;
+import com.aboguslawski.blog.model.OldPostData;
 
 import java.util.List;
 
 public interface PostService {
 
-    void addPost(Post post);
+    void addPost(OldPost oldPost);
 
     void removePost(int id);
 
-    Post getPost(int id);
+    OldPost getPost(int id);
 
-    void updatePost(Post post);
+    void updatePost(OldPost oldPost);
 
-    PostData getPostData();
+    OldPostData getOldPostData();
 
-    List<Post> search(String user, String content);
+    List<OldPost> search(String user, String content);
 
     void sort();
 }

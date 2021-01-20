@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.controller;
 
-import com.aboguslawski.blog.model.Post;
+import com.aboguslawski.blog.model.OldPost;
 import com.aboguslawski.blog.service.PostService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
@@ -38,25 +38,25 @@ public class MainPageController {
     }
 
     @PostMapping(Mappings.SEARCH)
-    public String searchPosts(Post post, Model model) {
-        String user = post.getUser();
-        String content = post.getContent();
-        List<Post> postList = postService.search(user, content);
+    public String searchPosts(OldPost oldPost, Model model) {
+        String user = oldPost.getUser();
+        String content = oldPost.getContent();
+        List<OldPost> oldPostList = postService.search(user, content);
 
-        model.addAttribute(AttributeNames.COUNT, postList.size());
-        model.addAttribute(AttributeNames.POSTS_LIST, postList);
-        model.addAttribute(AttributeNames.COUNT, postList.size());
+        model.addAttribute(AttributeNames.COUNT, oldPostList.size());
+        model.addAttribute(AttributeNames.POSTS_LIST, oldPostList);
+        model.addAttribute(AttributeNames.COUNT, oldPostList.size());
         return ViewNames.HOME;
     }
 
     @PostMapping(Mappings.HOME)
     public String sort(Model model){
         postService.sort();
-        List<Post> postList = postService.getPostData().getPosts();
+        List<OldPost> oldPostList = postService.getOldPostData().getOldPosts();
 
-        model.addAttribute(AttributeNames.POST, new Post(1, "", ""));
-        model.addAttribute(AttributeNames.POSTS_LIST, postList);
-        model.addAttribute(AttributeNames.COUNT, postList.size());
+        model.addAttribute(AttributeNames.POST, new OldPost(1, "", ""));
+        model.addAttribute(AttributeNames.POSTS_LIST, oldPostList);
+        model.addAttribute(AttributeNames.COUNT, oldPostList.size());
 
         return ViewNames.HOME;
     }
