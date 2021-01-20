@@ -2,7 +2,6 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.Post;
 import com.aboguslawski.blog.service.PostService;
-import com.aboguslawski.blog.service.UserService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
@@ -19,24 +18,22 @@ import java.util.List;
 @Slf4j
 public class MainPageController {
     // == fields ==
-    private final UserService userService;
     private final PostService postService;
 
     // == constructors ==
     @Autowired
-    public MainPageController(UserService userService, PostService postService) {
-        this.userService = userService;
+    public MainPageController(PostService postService) {
         this.postService = postService;
     }
 
     // == request methods ==
     @GetMapping(Mappings.HOME)
     public String listPosts(Model model) {
-        List<Post> postList = postService.getPostData().getPosts();
-
-        model.addAttribute(AttributeNames.POST, new Post(1, "", ""));
-        model.addAttribute(AttributeNames.POSTS_LIST, postList);
-        model.addAttribute(AttributeNames.COUNT, postList.size());
+//        List<Post> postList = postService.getPostData().getPosts();
+//
+//        model.addAttribute(AttributeNames.POST, new Post(1, "", ""));
+//        model.addAttribute(AttributeNames.POSTS_LIST, postList);
+//        model.addAttribute(AttributeNames.COUNT, postList.size());
         return ViewNames.HOME;
     }
 

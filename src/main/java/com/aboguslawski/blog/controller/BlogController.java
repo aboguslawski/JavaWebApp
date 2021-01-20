@@ -2,7 +2,6 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.Post;
 import com.aboguslawski.blog.service.PostService;
-import com.aboguslawski.blog.service.UserService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
@@ -21,13 +20,11 @@ import javax.validation.Valid;
 @Slf4j
 public class BlogController {
     // == fields ==
-    private final UserService userService;
     private final PostService postService;
 
     // == constructors ==
     @Autowired
-    public BlogController(UserService userService, PostService postService) {
-        this.userService = userService;
+    public BlogController(PostService postService) {
         this.postService = postService;
     }
 

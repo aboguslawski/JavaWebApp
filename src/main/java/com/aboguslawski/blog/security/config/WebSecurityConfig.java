@@ -29,6 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated().and()
                 .formLogin();
+
+
+        /* Fix the H2 console blank page problem.*/
+        http.headers().frameOptions().disable();
     }
 
     @Override

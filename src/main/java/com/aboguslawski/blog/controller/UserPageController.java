@@ -1,7 +1,6 @@
 package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.service.PostService;
-import com.aboguslawski.blog.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +9,11 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class UserPageController {
     // == fields ==
-    private final UserService userService;
     private final PostService postService;
 
     // == constructors ==
     @Autowired
-    public UserPageController(UserService userService, PostService postService) {
-        this.userService = userService;
+    public UserPageController(PostService postService) {
         this.postService = postService;
     }
 }

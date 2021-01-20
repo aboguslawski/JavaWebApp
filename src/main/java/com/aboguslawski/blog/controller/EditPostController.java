@@ -2,7 +2,6 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.Post;
 import com.aboguslawski.blog.service.PostService;
-import com.aboguslawski.blog.service.UserService;
 import com.aboguslawski.blog.util.AttributeNames;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
@@ -19,13 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class EditPostController {
     // == fields ==
-    private final UserService userService;
     private final PostService postService;
 
     // == constructors ==
     @Autowired
-    public EditPostController(UserService userService, PostService postService) {
-        this.userService = userService;
+    public EditPostController(PostService postService) {
         this.postService = postService;
     }
 
