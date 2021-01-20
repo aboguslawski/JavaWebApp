@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,27 +22,39 @@ public class UserService implements UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
+    /*  Looking for user with given email in database.
+     *   If not found, throwing an exception.*/
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepo.findByEmail(email)
-                .orElseThrow( () -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
-    public String singUpUser(User user){
-        boolean userExists = userRepo.findByEmail(user.getEmail())
+    /*  Signing up user to repository.
+     *   1. User is required to have unique email.
+     *   2. Confirmation token is sent to given email address.
+     *   3. Account is enabled by executing proper GET request with generated token as argument.*/
+    public String singUpUser(User user) {
+
+        /* Check if email is available.*/
+        boolean userExists = userRepo
+                .findByEmail(user.getEmail())
                 .isPresent();
 
-        if(userExists){
+        /* If so, throw an exception*/
+        if (userExists) {
             throw new IllegalStateException("email already taken");
         }
 
+        /* Encrypt password.*/
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encodedPassword);
 
+        /* Add user to repository.*/
         userRepo.save(user);
 
-        /* Send confirmation token */
+        /* Send confirmation token.*/
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -55,6 +66,11 @@ public class UserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         /*TODO: Send email*/
+
         return token;
+    }
+
+    public int enableUser(String email){
+        return userRepo.enableUser(email);
     }
 }

@@ -1,10 +1,7 @@
 package com.aboguslawski.blog.registration;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/registration")
@@ -13,9 +10,13 @@ public class RegistrationController {
 
     private RegistrationService registrationService;
 
-    // test
     @PostMapping
     public String register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
+    }
+
+    @GetMapping(path = "confirm")
+    public String confirm (@RequestParam("token") String token){
+        return registrationService.confirmToken(token);
     }
 }

@@ -9,7 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
-/* Token is sent to given email address and is required to complete the registration. */
+/*  Token is sent to given email address and is required to enable registered account
+    and therefore complete the registration process. */
 
 @Getter
 @Setter
@@ -29,6 +30,7 @@ public class ConfirmationToken {
     )
     private Long id;
 
+    /* Confirmation token value will be passed as an argument to GET request that activates the account.*/
     @Column(nullable = false)
     private String token;
 
