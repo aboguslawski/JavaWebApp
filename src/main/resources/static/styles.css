@@ -1,10 +1,19 @@
 * {
-    background-color: #bacce8;
+    background-color: #1B7E48;
+    color: #ffffcc;
+}
+
+a {
+    color: #ffffcc;;
+}
+
+a:hover{
+    color:pink;
 }
 
 .hd, .hd *{
     padding:12px;
-    background-color: #dfe8f0;
+    background-color: #353723;
 }
 
 .hd {
@@ -12,8 +21,7 @@
 }
 
 .box, .box *{
-    background-color: #dce5f5;
-    color: black;
+    background-color: #353723;
 }
 
 .box {
@@ -26,14 +34,12 @@
 .box2 {
     background-color: pink;
     border: 1px solid black;
-    color: black;
     padding: 12px;
 }
 
 .btn, .btn * {
     padding: 12px;
     background-color: #bacce8;
-    color: black;
 }
 
 .pd, .pd * {

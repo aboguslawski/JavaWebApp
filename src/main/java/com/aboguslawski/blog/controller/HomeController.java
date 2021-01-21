@@ -1,6 +1,8 @@
 package com.aboguslawski.blog.controller;
 
+import com.aboguslawski.blog.model.post.Post;
 import com.aboguslawski.blog.model.post.PostService;
+import com.aboguslawski.blog.model.user.User;
 import com.aboguslawski.blog.model.user.UserService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
@@ -24,9 +26,8 @@ public class HomeController {
 
     @GetMapping(Mappings.HOME)
     public String home(Model model){
-        model.addAttribute("all_posts", postService.allPosts());
-        model.addAttribute("username", userService.currentUserName());
-
+        model.addAttribute("postService", postService);
+        model.addAttribute("userService", userService);
         return ViewNames.HOME;
     }
 

@@ -7,9 +7,9 @@ import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -81,34 +81,34 @@ public class UserService implements UserDetailsService {
         return token;
     }
 
-    public String currentUserName(){
+    public String currentUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         return authentication.getName();
     }
 
-    public int enableUser(String email){
+    public int enableUser(String email) {
         return userRepo.enableUser(email);
     }
 
-    public Iterable<User> allUsers(){
+    public Iterable<User> allUsers() {
         return userRepo.findAll();
     }
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return userRepo.save(user);
     }
 
-    public void disableUser(String email){
+    public void disableUser(String email) {
         userRepo.disableUser(email);
     }
 
-    public Optional<User> findUser(long id){
+    public Optional<User> findUser(long id) {
         return userRepo.findById(id);
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void fillDatabase(){
+    public void fillDatabase() {
         User first = new User(
                 "first",
                 "one",
@@ -130,7 +130,6 @@ public class UserService implements UserDetailsService {
         enableUser("b@mail.com");
 
 
-
         User third = new User(
                 "third",
                 "three",
@@ -142,11 +141,19 @@ public class UserService implements UserDetailsService {
         enableUser("d@mail.com");
 
         Post post1 = new Post("first title", "first content");
-        List<User> authors1= new ArrayList<>();
+        List<User> authors1 = new ArrayList<>();
         authors1.add(first);
         authors1.add(second);
         postService.addPost(post1, authors1);
-        for (User u : authors1){
+        for (User u : authors1) {
+            saveUser(u);
+        }
+
+        Post post2 = new Post("second title", "second content");
+        List<User> authors2 = new ArrayList<>();
+        authors2.add(third);
+        postService.addPost(post2, authors2);
+        for (User u : authors2){
             saveUser(u);
         }
 

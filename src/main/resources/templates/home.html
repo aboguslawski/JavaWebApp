@@ -21,32 +21,29 @@
                     <a th:href="@{/}">Home</a>
 
                     <span>
-                        <a th:href="@{/new_post}">new post</a>
+<!--                        /my_posts-->
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).MY_POSTS}__}"
+                           th:text="${userService.currentUserName()}">my posts</a>
                     </span>
 
                     <span>
-                        <a th:href="@{/my_posts}">my posts</a>
+<!--                        /new_post-->
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
                     </span>
 
                     <span>
-                        <a th:href="@{/logout}">logout</a>
+<!--                        /logout-->
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
                     </span>
 
                     <span>
-                        <a>Welcome <span th:text="${username}">guest</span></a>
+<!--                        /login-->
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
+<!--                        /register-->
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
                     </span>
-
-                    <span>
-                        <a th:href="@{/login}">log in</a>
-                        <a th:href="@{/register}">sign up</a>
-                    </span>
-
-                     <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
-                         th:text="add_new_post"
-                         href="add_post.html">
-                         add post
-                     </a>
             </div>
+        </div>
 
             <!--<div class="col-md-8">
                 <form action="#" th:action="@{/search}" th:object="${oldPost}" method="oldPost">
@@ -65,26 +62,27 @@
                         <a><input class="box2" type="submit" value="sort"/> </a>
                     </div>
                 </form>
-            </div>-->
-        </div>
+            </div>
+        </div>-->
 
 
-        <!--<ul th:each="oldPost : ${postsList}">
+        <ul th:each="post : ${postService.allPosts()}">
             <div class="row">
-                <div class="col-md-1">
-                    <div class="box" align="center">
-                        <p th:text="${oldPost.usr}"/>
+                <div class="col-md-2">
+                    <div class="box" align="left">
+                        <ul th:each="user : ${post.getUsers()}">
+                            <a th:text="${user.email}"></a>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="box">
-                        <a th:text="${oldPost.content}"/>
+                        <a th:text="${post.content}">content</a>
                     </div>
                 </div>
                 <div align="center" class="col-md-1">
                     <div class="box">
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).VIEW_POST}__(id=${oldPost.id})}"
-                           th:text="view"
+                        <a th:text="view"
                            href="view_post.html">
                             view oldPost
                         </a>
@@ -92,7 +90,7 @@
                     </div>
                 </div>
             </div>
-        </ul>-->
+        </ul>
     </div>
 
 </body>
