@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+
+<div th:fragment="header">
+    <div  class="hd col-md-12">
+
+        <div class="pd">
+            <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__}">Home</a>
+
+            <span>
+<!--                        /my_posts-->
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${userService.currentUserName()})}"
+                           th:text="${userService.currentUserName()}">my posts</a>
+                    </span>
+
+            <span>
+<!--                        /new_post-->
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
+                    </span>
+
+            <span>
+<!--                        /logout-->
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
+                    </span>
+
+            <span>
+<!--                        /login-->
+                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
+                <!--                        /register-->
+                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
+                    </span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

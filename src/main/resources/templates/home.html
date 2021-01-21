@@ -10,45 +10,13 @@
             integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" th:href="@{/styles.css}" />
-
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+            </th:block> /*/-->
 </head>
 <body>
     <div>
 
-        <div  class="hd col-md-12">
-
-                <div class="pd">
-                    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__}">Home</a>
-
-                    <span>
-<!--                        /my_posts-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${userService.currentUserName()})}"
-                           th:text="${userService.currentUserName()}">my posts</a>
-                    </span>
-
-                    <span>
-<!--                        /new_post-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
-                    </span>
-
-                    <span>
-<!--                        /logout-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
-                    </span>
-
-                    <span>
-<!--                        /login-->
-                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
-<!--                        /register-->
-                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
-                    </span>
-            </div>
-        </div>
+        <div th:insert="fragments/general.html" :: header></div>
 
             <!--<div class="col-md-8">
                 <form action="#" th:action="@{/search}" th:object="${oldPost}" method="oldPost">
