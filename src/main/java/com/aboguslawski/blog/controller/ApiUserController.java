@@ -6,7 +6,9 @@ import com.aboguslawski.blog.model.user.User;
 import com.aboguslawski.blog.model.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,8 @@ public class ApiUserController {
     private final PostService postService;
 
     @GetMapping("/currentUser")
-    public String currentUserName(Principal authentication){
+    public String currentUserName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
     @GetMapping("/all")

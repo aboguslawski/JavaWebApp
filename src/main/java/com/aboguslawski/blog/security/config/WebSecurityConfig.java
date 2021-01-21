@@ -10,7 +10,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @AllArgsConstructor
@@ -25,14 +29,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**")
-                .hasRole(UserRole.ADMIN.name())
-                .antMatchers("/api/v*/registration/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated().and()
+                    .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                    .antMatchers("/api/v*/registration/**").hasRole(UserRole.ADMIN.name())
+                    .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .defaultSuccessUrl("/home.html", true);
+                    .permitAll()
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/home.html", true)
+                .and()
+                .logout()
+                    .permitAll();
 
 
         /* Fix the H2 console blank page problem.*/
@@ -52,4 +59,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return provider;
     }
+
+//    @Override
+//    @Bean
+//    protected UserDetailsService userDetailsService() {
+//        UserDetails adamUser = User.builder()
+//                .username("adam")
+//                .password(bCryptPasswordEncoder.encode("password"))
+//                .roles(UserRole.USER.name())
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(adamUser);
+//    }
 }
