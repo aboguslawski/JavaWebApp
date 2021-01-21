@@ -15,32 +15,37 @@
 <body>
     <div>
 
-        <div  class="hd col-md-12" align="center">
+        <div  class="hd col-md-12">
 
                 <div class="pd">
-                    <a th:href="@{/}">Home</a>
+                    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__}">Home</a>
 
                     <span>
 <!--                        /my_posts-->
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).MY_POSTS}__}"
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${userService.currentUserName()})}"
                            th:text="${userService.currentUserName()}">my posts</a>
                     </span>
 
                     <span>
 <!--                        /new_post-->
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
                     </span>
 
                     <span>
 <!--                        /logout-->
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
+                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
                     </span>
 
                     <span>
 <!--                        /login-->
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
+                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
 <!--                        /register-->
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
+                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
                     </span>
             </div>
         </div>
@@ -71,7 +76,8 @@
                 <div class="col-md-2">
                     <div class="box" align="left">
                         <ul th:each="user : ${post.getUsers()}">
-                            <a th:text="${user.email}"></a>
+                            <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${user.email})}"
+                               th:text="${user.email}"></a>
                         </ul>
                     </div>
                 </div>
