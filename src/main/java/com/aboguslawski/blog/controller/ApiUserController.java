@@ -26,8 +26,7 @@ public class ApiUserController {
 
     @GetMapping("/currentUser")
     public String currentUserName(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
+        return userService.currentUserName();
     }
     @GetMapping("/all")
     public Iterable<User> getAll() {

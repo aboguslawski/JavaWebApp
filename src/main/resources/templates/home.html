@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
@@ -13,23 +14,38 @@
 </head>
 <body>
     <div>
-        <div class="hd" align="center">
-            <h1>
-                displayed <a th:text="${count}"/> posts
-            </h1>
-        </div>
 
-        <div class="row">
+        <div  class="hd col-md-12" align="center">
 
-            <div class="col-md-2">
                 <div class="pd">
-                     <a class="box2"
-                         th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
+                    <a th:href="@{/}">Home</a>
+
+                    <span>
+                        <a th:href="@{/new_post}">new post</a>
+                    </span>
+
+                    <span>
+                        <a th:href="@{/my_posts}">my posts</a>
+                    </span>
+
+                    <span>
+                        <a th:href="@{/logout}">logout</a>
+                    </span>
+
+                    <span>
+                        <a>Welcome <span th:text="${username}">guest</span></a>
+                    </span>
+
+                    <span>
+                        <a th:href="@{/login}">log in</a>
+                        <a th:href="@{/register}">sign up</a>
+                    </span>
+
+                     <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).ADD_POST}__}"
                          th:text="add_new_post"
                          href="add_post.html">
-                         add oldPost
+                         add post
                      </a>
-                </div>
             </div>
 
             <!--<div class="col-md-8">

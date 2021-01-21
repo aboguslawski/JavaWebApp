@@ -6,6 +6,7 @@ import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,11 +19,14 @@ public class HomeController {
 
     @GetMapping("currentUser")
     public String currentUserName(){
-        return "test";
+        return userService.currentUserName();
     }
 
     @GetMapping(Mappings.HOME)
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("all_posts", postService.allPosts());
+        model.addAttribute("username", userService.currentUserName());
+
         return ViewNames.HOME;
     }
 

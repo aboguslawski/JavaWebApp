@@ -81,12 +81,10 @@ public class UserService implements UserDetailsService {
         return token;
     }
 
-    public String currentUser(){
+    public String currentUserName(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
 
-
-        return currentPrincipalName;
+        return authentication.getName();
     }
 
     public int enableUser(String email){

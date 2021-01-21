@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.security.config;
 
+import com.aboguslawski.blog.model.user.User;
 import com.aboguslawski.blog.model.user.UserRole;
 import com.aboguslawski.blog.model.user.UserService;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @AllArgsConstructor
@@ -29,17 +26,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                    .antMatchers("/api/v*/registration/**").hasRole(UserRole.ADMIN.name())
-                    .anyRequest().authenticated()
+                .antMatchers("/**").hasRole(UserRole.ADMIN.name())
+                .antMatchers("/**").permitAll()
+                .antMatchers("/api/v*/registration/**").hasRole(UserRole.ADMIN.name())
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .permitAll()
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/home.html", true)
+                .permitAll()
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
                 .and()
                 .logout()
-                    .permitAll();
+                .permitAll();
 
 
         /* Fix the H2 console blank page problem.*/
@@ -52,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(userService);
