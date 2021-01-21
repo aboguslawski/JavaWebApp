@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.security.config;
 
+import com.aboguslawski.blog.model.user.UserRole;
 import com.aboguslawski.blog.model.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,11 +25,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/**")
+                .hasRole(UserRole.ADMIN.name())
                 .antMatchers("/api/v*/registration/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
-                .formLogin();
+                .formLogin()
+                    .defaultSuccessUrl("/home.html", true);
 
 
         /* Fix the H2 console blank page problem.*/

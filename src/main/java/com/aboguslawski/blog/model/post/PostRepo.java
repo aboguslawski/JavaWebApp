@@ -7,4 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(readOnly = true)
 public interface PostRepo extends JpaRepository<Post, Long> {
+
 }
