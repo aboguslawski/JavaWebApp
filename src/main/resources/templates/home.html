@@ -88,8 +88,8 @@
                 </div>
                 <div align="center" class="col-md-1">
                     <div class="box">
-                        <a th:text="view"
-                           href="view_post.html">
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).POST}__(id=${post.id})}"
+                           th:text="view">
                             view oldPost
                         </a>
 
