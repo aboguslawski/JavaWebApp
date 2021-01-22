@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.controller;
 
+import com.aboguslawski.blog.model.post.Post;
 import com.aboguslawski.blog.model.post.PostService;
 import com.aboguslawski.blog.model.user.UserService;
 import com.aboguslawski.blog.util.Mappings;
@@ -27,6 +28,7 @@ public class HomeController {
     public String newPost(Model model) {
         model.addAttribute("postService", postService);
         model.addAttribute("userService", userService);
+        model.addAttribute("post", new Post());
 
         return ViewNames.NEW_POST;
     }

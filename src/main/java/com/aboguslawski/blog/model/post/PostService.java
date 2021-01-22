@@ -1,6 +1,7 @@
 package com.aboguslawski.blog.model.post;
 
 import com.aboguslawski.blog.model.user.User;
+import com.aboguslawski.blog.model.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepo postRepo;
+    private final UserService userService;
 
     public String save(Post post){
         postRepo.save(post);
@@ -19,11 +21,14 @@ public class PostService {
         return "post saved to repository";
     }
 
-    public String addPost(Post post, List<User> authors){
+    public String addPost(Post post){
         postRepo.save(post);
+//        post.getUsers().addAll(authors);
+//        postRepo.save(post);
 
-        post.getUsers().addAll(authors);
-        postRepo.save(post);
+        for (User u : post.getUsers()) {
+            userService.saveUser(u);
+        }
 
         return "post added";
     }

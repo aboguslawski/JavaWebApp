@@ -15,5 +15,31 @@
 <body>
 <div th:insert="fragments/general.html" :: header></div>
 
+<form action="#" th:action="@{/new_post}" th:object="${post}" method="post">
+    <div class="pd">
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct errors and resubmit
+            </span>
+        </div>
+
+        <p>title: <textarea th:field="*{title}"></textarea></p>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('title')}"
+              th:errors="*{title}">title error</span>
+
+        <p>content: <textarea th:field="*{content}"></textarea></p>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}">title error</span>
+
+        <p>
+            <input type="submit" value="submit"/>
+            <input type="reset" value="reset"/>
+        </p>
+    </div>
+</form>
+
 </body>
 </html>
