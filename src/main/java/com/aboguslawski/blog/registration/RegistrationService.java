@@ -53,15 +53,15 @@ public class RegistrationService {
     }
 
     public String registerAdmin() {
-        User admin = new User(
-                "Adam",
-                "Boguslawski",
-                "adam.boguslawski1998@gmail.com",
-                "admin1",
-                UserRole.ADMIN
-        );
-        userService.singUpUser(admin);
-        userService.enableUser(admin.getEmail());
+//        User admin = new User(
+//                "Adam",
+//                "Boguslawski",
+//                "adam.boguslawski1998@gmail.com",
+//                "admin1",
+//                UserRole.ADMIN
+//        );
+//        userService.singUpUser(admin);
+//        userService.enableUser(admin.getEmail());
 
         return "admin registered";
     }

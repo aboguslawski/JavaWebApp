@@ -26,12 +26,12 @@ public class ApiPostController {
         return postService.getById(id);
     }
 
-//    @PostMapping
-//    public boolean create(@RequestBody Post post, @RequestBody List<User> authors) {
-//        postService.addPost(post, authors);
-//
-//        return true;
-//    }
+    @PostMapping
+    public boolean create(@RequestBody Post post, @RequestBody List<User> authors) {
+        postService.addPost(post, authors);
+
+        return true;
+    }
 
 
     @PutMapping

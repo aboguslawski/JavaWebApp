@@ -80,11 +80,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User currentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User user = userRepo.findByEmail(authentication.getName()).get();
-        return user;
+        return userRepo.findByEmail(currentUserName()).get();
     }
+
 
     public int enableUser(String email) {
         return userRepo.enableUser(email);
@@ -94,8 +92,9 @@ public class UserService implements UserDetailsService {
         return userRepo.findAll();
     }
 
-    public User saveUser(User user) {
-        return userRepo.save(user);
+    public void saveUser(User user) {
+        userRepo.save(user);
+        enableUser(user.getEmail());
     }
 
     public void disableUser(String email) {

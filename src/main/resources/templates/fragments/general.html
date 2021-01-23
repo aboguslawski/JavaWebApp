@@ -15,7 +15,7 @@
             <span>
 <!--                        /my_posts-->
                         <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${userService.currentUserName()})}"
+                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${userService.currentUser().id})}"
                            th:text="${userService.currentUserName()}">my posts</a>
                     </span>
 

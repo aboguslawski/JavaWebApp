@@ -6,7 +6,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
@@ -15,7 +17,7 @@ import java.util.List;
 @ToString(exclude = "users")
 @NoArgsConstructor
 @Entity
-public class Post {
+public class Post implements Comparable<Post> {
 
     @Id
     @SequenceGenerator(
@@ -54,4 +56,20 @@ public class Post {
         this.comments = new ArrayList<>();
         this.publicatedAt = LocalDateTime.now();
     }
+
+    public String publication(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return publicatedAt.format(formatter);
+    }
+
+//    @Override
+//    public int compare(Post a, Post b) {
+//        return a.getPublicatedAt().compareTo(b.getPublicatedAt());
+//    }
+
+    @Override
+    public int compareTo(Post post) {
+        return this.getPublicatedAt().compareTo(post.getPublicatedAt());
+    }
+
 }

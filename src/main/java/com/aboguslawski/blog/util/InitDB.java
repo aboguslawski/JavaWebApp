@@ -3,8 +3,10 @@ package com.aboguslawski.blog.util;
 import com.aboguslawski.blog.model.post.Post;
 import com.aboguslawski.blog.model.post.PostService;
 import com.aboguslawski.blog.model.user.User;
+import com.aboguslawski.blog.model.user.UserRepo;
 import com.aboguslawski.blog.model.user.UserRole;
 import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -15,23 +17,34 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class InitData {
+public class InitDB {
 
-    private final PostService postService;
     private final UserService userService;
-
+    private final PostService postService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDatabase() {
+
+        User admin = new User(
+                "Adam",
+                "Boguslawski",
+                "adam.boguslawski1998@gmail.com",
+                "admin1",
+                UserRole.ADMIN
+        );
+        userService.singUpUser(admin);
+        userService.enableUser(admin.getEmail());
+
+
         User first = new User(
                 "first",
                 "one",
                 "e@mail.com",
                 "password",
-                UserRole.USER
+                UserRole.ADMIN
         );
         userService.singUpUser(first);
-        userService.enableUser("e@mail.com");
+        userService.enableUser(first.getEmail());
 
         User second = new User(
                 "second",
@@ -41,7 +54,7 @@ public class InitData {
                 UserRole.USER
         );
         userService.singUpUser(second);
-        userService.enableUser("b@mail.com");
+        userService.enableUser(second.getEmail());
 
 
         User third = new User(
@@ -52,26 +65,24 @@ public class InitData {
                 UserRole.USER
         );
         userService.singUpUser(third);
-        userService.enableUser("d@mail.com");
+        userService.enableUser(third.getEmail());
 
         Post post1 = new Post("first title", "first content");
         List<User> authors1 = new ArrayList<>();
         authors1.add(first);
         authors1.add(second);
-        post1.setUsers(authors1);
-        postService.addPost(post1);
-//        for (User u : authors1) {
-//            saveUser(u);
-//        }
+        postService.addPost(post1, authors1);
+        for (User u : authors1) {
+            userService.saveUser(u);
+        }
 
         Post post2 = new Post("second title", "second content");
         List<User> authors2 = new ArrayList<>();
         authors2.add(third);
-        post2.setUsers(authors2);
-        postService.addPost(post2);
-//        for (User u : authors2){
-//            saveUser(u);
-//        }
+        postService.addPost(post2, authors2);
+        for (User u : authors2){
+            userService.saveUser(u);
+        }
 
 
     }

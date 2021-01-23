@@ -10,6 +10,7 @@ public final class Mappings {
     public static final String NEW_POST = "/new_post";
     public static final String USER = "/user";
     public static final String POST = "/post";
+    public static final String SORT = "/sort";
 
     public static final String VIEW_POST = "viewPost";
     public static final String DELETE_POST = "deletePost";
