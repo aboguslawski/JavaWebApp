@@ -62,14 +62,27 @@
         </div>
         <div class="col-md-9">
             <div class="box">
-                <a th:text="${post.content}">content</a>
+                <a th:text="${post.title}">content</a>
             </div>
         </div>
         <div align="center" class="col-md-1">
+            <div th:if="${userService.currentUserName() == commentService.user(comment).email || userService.isAdmin()}"
+                 class="box">
+
+                <p><a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_POST}__(id=${post.id})}"
+                      th:text="edit"></a>
+                </p>
+                <p> <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_POST}__(id=${post.id})}"
+                       th:text="delete"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-11">
             <div class="box">
-                <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).POST}__(id=${post.id})}"
-                   th:text="edit">
-                </a>
+                <a th:text="${post.content}">content</a>
             </div>
         </div>
     </div>
@@ -106,9 +119,12 @@
             </div>
             <div th:if="${userService.currentUserName() == commentService.user(comment).email || userService.isAdmin()}"
                  class="col-md-1">
-                <p th:text="edit"></p>
-                <p th:text="delete"
-                    th:href></p>
+                <p><a th:text="edit"
+                      th:href="@{__${T(com.aboguslawski.blog.util.Mappings).EDIT_COMMENT}__(id=${comment.id})}"></a></p>
+
+
+                <p><a th:text="delete"
+                      th:href="@{__${T(com.aboguslawski.blog.util.Mappings).DELETE_COMMENT}__(id=${comment.id})}"></a></p>
             </div>
         </div>
     </ul>

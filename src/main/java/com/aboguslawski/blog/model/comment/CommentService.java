@@ -40,4 +40,20 @@ public class CommentService {
         return userService.findUser(1L).get();
     }
 
+    public void delete(Comment comment){
+        commentRepo.delete(comment);
+        log.info("comment deleted");
+    }
+
+    public Comment getById(Long id){
+        if(commentRepo.findById(id).isPresent()){
+            return commentRepo.findById(id).get();
+        }
+        return null;
+    }
+
+    public void save(Comment comment){
+        commentRepo.save(comment);
+    }
+
 }

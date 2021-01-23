@@ -56,6 +56,7 @@ public class PostService {
 
     public void deleteById(long id) {
         postRepo.deleteById(id);
+        log.info("post deleted");
     }
 
     public List<Post> sortedPosts() {

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -59,5 +60,76 @@ public class PostController {
 
         return "redirect:/" + ViewNames.POST + "?id=" + post.getId();
 
+    }
+
+    @GetMapping(Mappings.DELETE_POST)
+    public String deletePost(@RequestParam Long id, Model model){
+
+        Post post = postService.getById(id).get();
+
+        for(Comment c : post.getComments()){
+            commentService.delete(c);
+        }
+
+        postService.deleteById(id);
+
+        model.addAttribute("commentService", commentService);
+        model.addAttribute("postService", postService);
+        model.addAttribute("userService", userService);
+        return "redirect:/";
+    }
+
+    @GetMapping(Mappings.DELETE_COMMENT)
+    public String deleteComment(@RequestParam Long id, Model model){
+
+        Comment comment = commentService.getById(id);
+        commentService.delete(comment);
+
+        model.addAttribute("commentService", commentService);
+        model.addAttribute("postService", postService);
+        model.addAttribute("userService", userService);
+        return "redirect:/";
+    }
+
+    @GetMapping(Mappings.EDIT_POST)
+    public String editPost(@RequestParam Long id, Model model){
+        Post post = postService.getById(id).get();
+
+        model.addAttribute("post", post);
+        model.addAttribute("commentService", commentService);
+        model.addAttribute("postService", postService);
+        model.addAttribute("userService", userService);
+        return ViewNames.EDIT_POST;
+    }
+
+    @PostMapping(Mappings.EDIT_POST)
+    public String editPostSubmit(@RequestParam Long id, @Valid Post post, Errors errors){
+        Post p = postService.getById(id).get();
+        p.setTitle(post.getTitle());
+        p.setContent(post.getContent());
+        postService.save(p);
+
+        return "redirect:/" + ViewNames.POST + "?id=" + p.getId();
+    }
+
+    @GetMapping(Mappings.EDIT_COMMENT)
+    public String editComment(@RequestParam Long id, Model model){
+        Comment comment = commentService.getById(id);
+
+        model.addAttribute("comment", comment);
+        model.addAttribute("commentService", commentService);
+        model.addAttribute("postService", postService);
+        model.addAttribute("userService", userService);
+        return ViewNames.EDIT_COMMENT;
+    }
+
+    @PostMapping(Mappings.EDIT_COMMENT)
+    public String editCommentSubmit(@Valid Comment comment, Errors errors){
+        Comment c = commentService.getById(comment.getId());
+        log.info("" + c + " " + c.getId() + " " + c.getContent());
+        c.setContent(comment.getContent());
+        commentService.save(c);
+
+        return "redirect:/";
     }
 }

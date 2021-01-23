@@ -39,19 +39,19 @@
 </div>-->
 
 
-    <ul th:each="post : ${postService.allPosts()}">
+    <ul th:each="post : ${posts}">
         <div class="row">
             <div class="col-md-2">
                 <div class="box" align="left">
                     <ul th:each="user : ${post.getUsers()}">
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(email=${user.email})}"
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${user.id})}"
                            th:text="${user.email}"></a>
                     </ul>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="box">
-                    <a th:text="${post.content}">content</a>
+                    <a th:text="${post.title}">content</a>
                 </div>
             </div>
             <div align="center" class="col-md-1">

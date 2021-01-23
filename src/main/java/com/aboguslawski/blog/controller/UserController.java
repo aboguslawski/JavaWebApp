@@ -26,6 +26,6 @@ public class UserController {
         model.addAttribute("posts", postService.postsOf(id));
         model.addAttribute("postService", postService);
         model.addAttribute("userService", userService);
-        return ViewNames.HOME;
+        return ViewNames.USER;
     }
 }

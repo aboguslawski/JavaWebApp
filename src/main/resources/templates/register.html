@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+    <!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+            </th:block> /*/-->
+</head>
+<body>
+<div>
+
+    <div th:insert="fragments/general.html" :: header></div>
+
+    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+        <div class="pd">
+
+            <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Please correct errors and resubmit
+            </span>
+            </div>
+
+            <p>title: <textarea th:field="*{title}"></textarea></p>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('title')}"
+                  th:errors="*{title}">title error</span>
+
+            <p>content: <textarea th:field="*{content}"></textarea></p>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('content')}"
+                  th:errors="*{content}">title error</span>
+
+            <p>
+                <input type="submit" value="submit"/>
+                <input type="reset" value="reset"/>
+            </p>
+        </div>
+    </form>
+
+</body>
+</html>

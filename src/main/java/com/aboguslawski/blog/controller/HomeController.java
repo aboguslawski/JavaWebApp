@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -50,6 +51,12 @@ public class HomeController {
         model.addAttribute("postService", postService);
         model.addAttribute("userService", userService);
         return ViewNames.HOME;
+    }
+
+    @GetMapping(Mappings.REGISTER)
+    public String register(){
+
+        return ViewNames.REGISTER;
     }
 
     //    @PostMapping(Mappings.SEARCH)
