@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Getter
@@ -35,7 +36,7 @@ public class Post implements Comparable<Post> {
 
     private String content;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "post_user",
             joinColumns = @JoinColumn(name = "post_id"),
@@ -72,4 +73,12 @@ public class Post implements Comparable<Post> {
         return this.getPublicatedAt().compareTo(post.getPublicatedAt());
     }
 
+    public List<User> getUsers() {
+        LinkedHashSet<User> set = new LinkedHashSet<>();
+        set.addAll(users);
+        users.clear();
+        users.addAll(set);
+
+        return users;
+    }
 }

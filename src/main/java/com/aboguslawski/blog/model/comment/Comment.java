@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.model.comment;
 
+import com.aboguslawski.blog.model.user.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -34,5 +36,10 @@ public class Comment {
     public Comment(String content) {
         this.content = content;
         this.publicatedAt = LocalDateTime.now();
+    }
+
+    public String publication(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return publicatedAt.format(formatter);
     }
 }

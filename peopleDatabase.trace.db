@@ -214,3 +214,7 @@ select User a where a.id = 1 [42122-200]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-01-23 15:36:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Wartość za długa dla kolumny "USER VARBINARY(255)": "X'aced000573720025636f6d2e61626f6775736c6177736b692e626c6f672e6d6f64656c2e757365722e55736572b2e2584b89c1d88a0200094c0008636f6d6d... (1165)"
+Value too long for column "USER VARBINARY(255)": "X'aced000573720025636f6d2e61626f6775736c6177736b692e626c6f672e6d6f64656c2e757365722e55736572b2e2584b89c1d88a0200094c0008636f6d6d... (1165)"; SQL statement:
+insert into comment (content, publicated_at, user, id) values (?, ?, ?, ?) [22001-200]

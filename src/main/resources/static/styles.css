@@ -3,8 +3,13 @@
     color: #ffffcc;
 }
 
+.date {
+    margin:6px;
+    padding:6px;
+}
+
 a {
-    color: #ffffcc;;
+    color: #ffffcc;
 }
 
 a:hover{
@@ -22,6 +27,16 @@ a:hover{
 
 .box, .box *{
     background-color: #353723;
+}
+
+.com, .com *{
+    background-color: #155e36;
+}
+
+.com{
+    height: 120px;
+    padding: 6px;
+    margin: 6px;
 }
 
 .box {

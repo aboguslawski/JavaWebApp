@@ -1,13 +1,14 @@
 package com.aboguslawski.blog.util;
 
+import com.aboguslawski.blog.model.comment.Comment;
+import com.aboguslawski.blog.model.comment.CommentService;
 import com.aboguslawski.blog.model.post.Post;
 import com.aboguslawski.blog.model.post.PostService;
 import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserRepo;
 import com.aboguslawski.blog.model.user.UserRole;
 import com.aboguslawski.blog.model.user.UserService;
-import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class InitDB {
 
     private final UserService userService;
     private final PostService postService;
+    private final CommentService commentService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDatabase() {
@@ -41,7 +44,7 @@ public class InitDB {
                 "one",
                 "e@mail.com",
                 "password",
-                UserRole.ADMIN
+                UserRole.USER
         );
         userService.singUpUser(first);
         userService.enableUser(first.getEmail());
@@ -80,10 +83,13 @@ public class InitDB {
         List<User> authors2 = new ArrayList<>();
         authors2.add(third);
         postService.addPost(post2, authors2);
-        for (User u : authors2){
+        for (User u : authors2) {
             userService.saveUser(u);
         }
 
+        Comment comment1 = new Comment("comment1");
+
+        commentService.addComment(comment1, post1, first);
 
     }
 }

@@ -3,6 +3,7 @@ package com.aboguslawski.blog.model.user;
 import com.aboguslawski.blog.registration.token.ConfirmationToken;
 import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG =
@@ -83,9 +85,20 @@ public class UserService implements UserDetailsService {
         return userRepo.findByEmail(currentUserName()).get();
     }
 
+    public boolean isAdmin(){
+        if(userRepo.findByEmail(currentUserName()).isPresent()){
+            if (userRepo.findByEmail(currentUserName()).get().getUserRole() == UserRole.ADMIN){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public int enableUser(String email) {
         return userRepo.enableUser(email);
+
     }
 
     public Iterable<User> allUsers() {
