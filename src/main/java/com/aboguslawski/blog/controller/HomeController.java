@@ -2,15 +2,19 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.post.Post;
 import com.aboguslawski.blog.model.post.PostService;
+import com.aboguslawski.blog.model.user.User;
+import com.aboguslawski.blog.model.user.UserRole;
 import com.aboguslawski.blog.model.user.UserService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -54,9 +58,25 @@ public class HomeController {
     }
 
     @GetMapping(Mappings.REGISTER)
-    public String register(){
+    public String register(Model model){
 
+        model.addAttribute("user", new User());
         return ViewNames.REGISTER;
+    }
+
+    @PostMapping(Mappings.REGISTER)
+    public String registerSubmit(@Valid User user, Errors errors){
+        User u = new User(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPassword(),
+                UserRole.USER
+        );
+        userService.singUpUser(u);
+        userService.enableUser(u.getEmail());
+
+        return "redirect:/";
     }
 
     //    @PostMapping(Mappings.SEARCH)

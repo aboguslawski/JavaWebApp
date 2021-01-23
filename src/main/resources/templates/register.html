@@ -17,8 +17,6 @@
 <body>
 <div>
 
-    <div th:insert="fragments/general.html" :: header></div>
-
     <form action="#" th:action="@{/register}" th:object="${user}" method="post">
         <div class="pd">
 
@@ -28,18 +26,29 @@
             </span>
             </div>
 
-            <p>title: <textarea th:field="*{title}"></textarea></p>
+            <p>first name: <textarea th:field="*{firstName}"></textarea></p>
             <span class="validationError"
-                  th:if="${#fields.hasErrors('title')}"
-                  th:errors="*{title}">title error</span>
+                  th:if="${#fields.hasErrors('firstName')}"
+                  th:errors="*{firstName}">title error</span>
 
-            <p>content: <textarea th:field="*{content}"></textarea></p>
+            <p>last name: <textarea th:field="*{lastName}"></textarea></p>
             <span class="validationError"
-                  th:if="${#fields.hasErrors('content')}"
-                  th:errors="*{content}">title error</span>
+                  th:if="${#fields.hasErrors('lastName')}"
+                  th:errors="*{lastName}">title error</span>
+
+            <p>email: <textarea th:field="*{email}"></textarea></p>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}">title error</span>
+
+            <p>password: <textarea th:field="*{password}"></textarea></p>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}">title error</span>
+
 
             <p>
-                <input type="submit" value="submit"/>
+                <input type="submit" value="register"/>
                 <input type="reset" value="reset"/>
             </p>
         </div>
