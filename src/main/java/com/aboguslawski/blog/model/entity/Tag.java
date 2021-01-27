@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Tag {
 
@@ -26,4 +25,7 @@ public class Tag {
 
     private String tag;
 
+    public Tag(String tag) {
+        this.tag = tag;
+    }
 }
