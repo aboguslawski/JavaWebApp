@@ -1,7 +1,5 @@
-package com.aboguslawski.blog.model.user;
+package com.aboguslawski.blog.model.entity;
 
-import com.aboguslawski.blog.model.comment.Comment;
-import com.aboguslawski.blog.model.post.Post;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

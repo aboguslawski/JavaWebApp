@@ -1,4 +1,4 @@
-package com.aboguslawski.blog.model.user;
+package com.aboguslawski.blog.model.entity;
 
 public enum UserRole {
     USER,

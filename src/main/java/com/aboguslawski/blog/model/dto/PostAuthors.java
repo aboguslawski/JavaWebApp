@@ -1,4 +1,4 @@
-package com.aboguslawski.blog.model.post;
+package com.aboguslawski.blog.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

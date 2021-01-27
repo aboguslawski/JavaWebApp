@@ -1,9 +1,9 @@
 package com.aboguslawski.blog.registration;
 
 import com.aboguslawski.blog.email.EmailSender;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserRole;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.entity.UserRole;
+import com.aboguslawski.blog.model.service.UserService;
 import com.aboguslawski.blog.registration.token.ConfirmationToken;
 import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;

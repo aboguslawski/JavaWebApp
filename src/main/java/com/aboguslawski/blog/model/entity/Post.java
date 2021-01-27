@@ -1,20 +1,17 @@
-package com.aboguslawski.blog.model.post;
+package com.aboguslawski.blog.model.entity;
 
-import com.aboguslawski.blog.model.comment.Comment;
-import com.aboguslawski.blog.model.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude="users")
+@EqualsAndHashCode(exclude = "users")
 @ToString(exclude = "users")
 @NoArgsConstructor
 @Entity
@@ -48,6 +45,10 @@ public class Post implements Comparable<Post> {
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<Tag> tags;
+
     private LocalDateTime publicatedAt;
 
     public Post(String title, String content) {
@@ -55,18 +56,14 @@ public class Post implements Comparable<Post> {
         this.content = content;
         this.users = new ArrayList<>();
         this.comments = new ArrayList<>();
+        this.tags = new ArrayList<>();
         this.publicatedAt = LocalDateTime.now();
     }
 
-    public String publication(){
+    public String publication() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return publicatedAt.format(formatter);
     }
-
-//    @Override
-//    public int compare(Post a, Post b) {
-//        return a.getPublicatedAt().compareTo(b.getPublicatedAt());
-//    }
 
     @Override
     public int compareTo(Post post) {

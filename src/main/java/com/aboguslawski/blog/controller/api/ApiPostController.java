@@ -1,10 +1,10 @@
-package com.aboguslawski.blog.controller;
+package com.aboguslawski.blog.controller.api;
 
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostAuthors;
-import com.aboguslawski.blog.model.post.PostService;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.dto.PostAuthors;
+import com.aboguslawski.blog.model.service.PostService;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

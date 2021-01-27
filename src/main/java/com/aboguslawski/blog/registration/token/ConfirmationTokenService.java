@@ -1,6 +1,6 @@
 package com.aboguslawski.blog.registration.token;
 
-import com.aboguslawski.blog.model.user.User;
+import com.aboguslawski.blog.model.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

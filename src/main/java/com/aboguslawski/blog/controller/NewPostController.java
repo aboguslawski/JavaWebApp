@@ -1,9 +1,9 @@
 package com.aboguslawski.blog.controller;
 
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostService;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.service.PostService;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.service.UserService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;

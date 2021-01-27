@@ -1,9 +1,9 @@
-package com.aboguslawski.blog.model.comment;
+package com.aboguslawski.blog.model.service;
 
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostService;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Comment;
+import com.aboguslawski.blog.model.repository.CommentRepo;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

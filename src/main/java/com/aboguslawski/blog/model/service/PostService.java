@@ -1,7 +1,8 @@
-package com.aboguslawski.blog.model.post;
+package com.aboguslawski.blog.model.service;
 
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.repository.PostRepo;
+import com.aboguslawski.blog.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

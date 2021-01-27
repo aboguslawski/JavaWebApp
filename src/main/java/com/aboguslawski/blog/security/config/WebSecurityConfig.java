@@ -1,8 +1,7 @@
 package com.aboguslawski.blog.security.config;
 
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserRole;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.UserRole;
+import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

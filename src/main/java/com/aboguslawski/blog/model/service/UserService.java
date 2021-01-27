@@ -1,9 +1,12 @@
-package com.aboguslawski.blog.model.user;
+package com.aboguslawski.blog.model.service;
 
-import com.aboguslawski.blog.model.comment.Comment;
-import com.aboguslawski.blog.model.comment.CommentRepo;
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostRepo;
+import com.aboguslawski.blog.model.entity.Comment;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.repository.CommentRepo;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.repository.PostRepo;
+import com.aboguslawski.blog.model.repository.UserRepo;
+import com.aboguslawski.blog.model.entity.UserRole;
 import com.aboguslawski.blog.registration.token.ConfirmationToken;
 import com.aboguslawski.blog.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;

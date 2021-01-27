@@ -1,6 +1,5 @@
-package com.aboguslawski.blog.model.comment;
+package com.aboguslawski.blog.model.entity;
 
-import com.aboguslawski.blog.model.user.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,11 +1,11 @@
 package com.aboguslawski.blog.controller;
 
-import com.aboguslawski.blog.model.comment.Comment;
-import com.aboguslawski.blog.model.comment.CommentService;
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostService;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Comment;
+import com.aboguslawski.blog.model.service.CommentService;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.service.PostService;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.service.UserService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Controller
 @AllArgsConstructor

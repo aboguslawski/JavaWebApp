@@ -1,12 +1,12 @@
 package com.aboguslawski.blog.util;
 
-import com.aboguslawski.blog.model.comment.Comment;
-import com.aboguslawski.blog.model.comment.CommentService;
-import com.aboguslawski.blog.model.post.Post;
-import com.aboguslawski.blog.model.post.PostService;
-import com.aboguslawski.blog.model.user.User;
-import com.aboguslawski.blog.model.user.UserRole;
-import com.aboguslawski.blog.model.user.UserService;
+import com.aboguslawski.blog.model.entity.Comment;
+import com.aboguslawski.blog.model.service.CommentService;
+import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.service.PostService;
+import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.entity.UserRole;
+import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
