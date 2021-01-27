@@ -5,6 +5,8 @@ import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
 import com.aboguslawski.blog.model.entity.UserRole;
 import com.aboguslawski.blog.model.service.UserService;
+import com.aboguslawski.blog.registration.RegistrationRequest;
+import com.aboguslawski.blog.registration.RegistrationService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class HomeController {
 
     private final PostService postService;
     private final UserService userService;
+    private final RegistrationService registrationService;
 
     @GetMapping(Mappings.HOME)
     public String home(Model model) {
@@ -59,21 +62,14 @@ public class HomeController {
     @GetMapping(Mappings.REGISTER)
     public String register(Model model){
 
-        model.addAttribute("user", new User());
+        model.addAttribute("request", new RegistrationRequest("" , "" , "", ""));
         return ViewNames.REGISTER;
     }
 
     @PostMapping(Mappings.REGISTER)
-    public String registerSubmit(@Valid User user, Errors errors){
-        User u = new User(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPassword(),
-                UserRole.USER
-        );
-        userService.singUpUser(u);
-        userService.enableUser(u.getEmail());
+    public String registerSubmit(@Valid RegistrationRequest request, Errors errors){
+
+        registrationService.register(request);
 
         return "redirect:/";
     }

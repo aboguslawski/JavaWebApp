@@ -17,7 +17,7 @@
 <body>
 <div>
 
-    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/register}" th:object="${request}" method="post">
         <div class="pd">
 
             <div th:if="${#fields.hasErrors()}">
