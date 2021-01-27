@@ -1,11 +1,14 @@
 package com.aboguslawski.blog.model.service;
 
+import com.aboguslawski.blog.model.dto.TagDTO;
+import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.entity.Tag;
 import com.aboguslawski.blog.model.repository.TagRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +17,7 @@ import java.util.Optional;
 public class TagService {
 
     private final TagRepo tagRepo;
+    private final PostService postService;
 
     public boolean isPresent(String tag) {
         return tagRepo
@@ -51,4 +55,33 @@ public class TagService {
         return t;
     }
 
+    public List<Tag> all(){
+        return tagRepo.findAll();
+    }
+
+    public String save(String tag){
+        tagRepo.save(use(tag));
+
+        String msg = "tag " + tag + " saved";
+        log.info(msg);
+        return msg;
+    }
+    public String delete(String tag){
+        tagRepo.delete(get(tag));
+
+        return "tag " + tag + " deleted";
+    }
+
+    public String addToPost(TagDTO tagDTO) {
+        Tag tag = use(tagDTO.getTag());
+
+        Post post = postService.getById(tagDTO.getPost());
+
+        post.getTags().add(tag);
+        postService.save(post);
+
+        String msg = "added tag " + tag.getTag() + " to post " + post.getId();
+        log.info(msg);
+        return msg;
+    }
 }
