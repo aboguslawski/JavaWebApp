@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://thymeleaf.org"
 >
 <head>
     <meta charset="UTF-8">
@@ -15,44 +15,74 @@
             </th:block> /*/-->
 </head>
 <body>
-<div>
+<!--<div>-->
 
-    <form action="#" th:action="@{/register}" th:object="${request}" method="post">
-        <div class="pd">
+    <form method="POST" th:action="@{/register}" th:object="${registrationRequest}">
 
             <div th:if="${#fields.hasErrors()}">
-            <span class="validationError">
-                Please correct errors and resubmit
-            </span>
+                <span class="validationError">
+                    Please correct errors and resubmit
+                </span>
             </div>
+            <br/>
 
-            <p>first name: <textarea th:field="*{firstName}"></textarea></p>
+            <label>first name:</label>
+            <input type="text" th:field="*{firstName}"/>
             <span class="validationError"
                   th:if="${#fields.hasErrors('firstName')}"
-                  th:errors="*{firstName}">title error</span>
+                  th:errors="*{firstName}">name error
+            </span>
+            <br/>
 
-            <p>last name: <textarea th:field="*{lastName}"></textarea></p>
+<!--            <p>first name: <textarea th:field="*{firstName}"></textarea></p>-->
+<!--            <span class="validationError"-->
+<!--                  th:if="${#fields.hasErrors('firstName')}"-->
+<!--                  th:errors="*{firstName}">title error</span>-->
+
+            <label>last name:</label>
+            <input type="text" th:field="*{lastName}"/>
             <span class="validationError"
                   th:if="${#fields.hasErrors('lastName')}"
-                  th:errors="*{lastName}">title error</span>
+                  th:errors="*{lastName}">last name error
+            </span>
+            <br/>
 
-            <p>email: <textarea th:field="*{email}"></textarea></p>
+<!--            <p>last name: <textarea th:field="*{lastName}"></textarea></p>-->
+<!--            <span class="validationError"-->
+<!--                  th:if="${#fields.hasErrors('lastName')}"-->
+<!--                  th:errors="*{lastName}">title error</span>-->
+
+            <label>email:</label>
+            <input type="text" th:field="*{email}"/>
             <span class="validationError"
                   th:if="${#fields.hasErrors('email')}"
-                  th:errors="*{email}">title error</span>
+                  th:errors="*{email}">email error
+            </span>
+            <br/>
 
-            <p>password: <textarea th:field="*{password}"></textarea></p>
+<!--            <p>email: <textarea th:field="*{email}"></textarea></p>-->
+<!--            <span class="validationError"-->
+<!--                  th:if="${#fields.hasErrors('email')}"-->
+<!--                  th:errors="*{email}">title error</span>-->
+
+            <label>password:</label>
+            <input type="text" th:field="*{password}"/>
             <span class="validationError"
                   th:if="${#fields.hasErrors('password')}"
-                  th:errors="*{password}">title error</span>
+                  th:errors="*{password}">password error
+            </span>
+            <br/>
+
+<!--            <p>password: <textarea th:field="*{password}"></textarea></p>-->
+<!--            <span class="validationError"-->
+<!--                  th:if="${#fields.hasErrors('password')}"-->
+<!--                  th:errors="*{password}">title error</span>-->
 
 
-            <p>
                 <input type="submit" value="register"/>
                 <input type="reset" value="reset"/>
-            </p>
-        </div>
     </form>
+<!--</div>-->
 
 </body>
 </html>

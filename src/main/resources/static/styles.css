@@ -95,6 +95,6 @@ div.ingredient-group {
 }
 
 span.validationError {
-    font-weight: bold;
-	color: #cc2e0a
+	color: pink;
+	background-color:black;
 }

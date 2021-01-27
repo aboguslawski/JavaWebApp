@@ -2,25 +2,26 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.service.PostService;
-import com.aboguslawski.blog.model.entity.User;
-import com.aboguslawski.blog.model.entity.UserRole;
 import com.aboguslawski.blog.model.service.UserService;
 import com.aboguslawski.blog.registration.RegistrationRequest;
 import com.aboguslawski.blog.registration.RegistrationService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@Slf4j
 public class HomeController {
 
     private final PostService postService;
@@ -60,30 +61,25 @@ public class HomeController {
     }
 
     @GetMapping(Mappings.REGISTER)
-    public String register(Model model){
+    public String register(Model model) {
 
-        model.addAttribute("request", new RegistrationRequest("" , "" , "", ""));
+        model.addAttribute("registrationRequest", new RegistrationRequest("", "", "", ""));
         return ViewNames.REGISTER;
     }
 
     @PostMapping(Mappings.REGISTER)
-    public String registerSubmit(@Valid RegistrationRequest request, Errors errors){
+    public String registerSubmit(Model model, @Valid RegistrationRequest registrationRequest, Errors errors) {
 
-        registrationService.register(request);
+        if (errors.hasErrors()) {
+            model.addAttribute("registrationRequest",registrationRequest);
+            log.info("error during registration");
+            return ViewNames.REGISTER;
+        }else{
+            registrationService.register(registrationRequest);
+        }
+
 
         return "redirect:/";
     }
-
-    //    @PostMapping(Mappings.SEARCH)
-//    public String searchPosts(OldPost oldPost, Model model) {
-//        String user = oldPost.getUser();
-//        String content = oldPost.getContent();
-//        List<OldPost> oldPostList = postService.search(user, content);
-//
-//        model.addAttribute(AttributeNames.COUNT, oldPostList.size());
-//        model.addAttribute(AttributeNames.POSTS_LIST, oldPostList);
-//        model.addAttribute(AttributeNames.COUNT, oldPostList.size());
-//        return ViewNames.HOME;
-//    }
 
 }

@@ -11,13 +11,13 @@ public class EmailValidator implements Predicate<String> {
 
     @Override
     public boolean test(String email) {
-        boolean result = true;
-        try{
-            InternetAddress internetAddress = new InternetAddress(email);
-            internetAddress.validate();
-        }catch (AddressException e){
-            return false;
-        }
+//        boolean result = true;
+//        try{
+//            InternetAddress internetAddress = new InternetAddress(email);
+//            internetAddress.validate();
+//        }catch (AddressException e){
+//            return false;
+//        }
         return true;
     }
 }
