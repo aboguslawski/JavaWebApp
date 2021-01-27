@@ -56,4 +56,8 @@ public class CommentService {
         commentRepo.save(comment);
     }
 
+    public Iterable<Comment> allComments() {
+        return commentRepo.findAll();
+    }
+
 }

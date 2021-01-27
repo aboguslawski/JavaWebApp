@@ -31,7 +31,7 @@ public class PostController {
 
     @GetMapping(Mappings.POST)
     public String post(@RequestParam Long id, Model model){
-        Post post = postService.getById(id).get();
+        Post post = postService.getById(id);
 
         log.info(post.getComments().size() + " comments");
 
@@ -51,7 +51,7 @@ public class PostController {
         log.info("comment content " + comment.getContent());
         log.info("comment id " + comment.getId());
 
-        Post post = postService.getById(comment.getId()).get();
+        Post post = postService.getById(comment.getId());
         Comment c = new Comment(comment.getContent());
         User user = userService.currentUser();
 
@@ -65,7 +65,7 @@ public class PostController {
     @GetMapping(Mappings.DELETE_POST)
     public String deletePost(@RequestParam Long id, Model model){
 
-        Post post = postService.getById(id).get();
+        Post post = postService.getById(id);
 
         for(Comment c : post.getComments()){
             commentService.delete(c);
@@ -93,7 +93,7 @@ public class PostController {
 
     @GetMapping(Mappings.EDIT_POST)
     public String editPost(@RequestParam Long id, Model model){
-        Post post = postService.getById(id).get();
+        Post post = postService.getById(id);
 
         model.addAttribute("post", post);
         model.addAttribute("commentService", commentService);
@@ -104,7 +104,7 @@ public class PostController {
 
     @PostMapping(Mappings.EDIT_POST)
     public String editPostSubmit(@RequestParam Long id, @Valid Post post, Errors errors){
-        Post p = postService.getById(id).get();
+        Post p = postService.getById(id);
         p.setTitle(post.getTitle());
         p.setContent(post.getContent());
         postService.save(p);

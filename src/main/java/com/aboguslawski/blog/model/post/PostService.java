@@ -46,8 +46,11 @@ public class PostService {
         return postRepo.findAll();
     }
 
-    public Optional<Post> getById(long id) {
-        return postRepo.findById(id);
+    public Post getById(long id) {
+        if (postRepo.findById(id).isPresent()){
+            return postRepo.findById(id).get();
+        }
+        return null;
     }
 
     public void savePost(Post post) {
