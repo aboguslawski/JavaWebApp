@@ -1,6 +1,7 @@
 package com.aboguslawski.blog.registration;
 
 import com.aboguslawski.blog.email.EmailSender;
+import com.aboguslawski.blog.email.EmailValidator;
 import com.aboguslawski.blog.model.entity.User;
 import com.aboguslawski.blog.model.entity.UserRole;
 import com.aboguslawski.blog.model.service.UserService;
