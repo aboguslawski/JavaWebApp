@@ -1,9 +1,9 @@
 package com.aboguslawski.blog.model.service;
 
 import com.aboguslawski.blog.model.entity.Comment;
-import com.aboguslawski.blog.model.repository.CommentRepo;
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.repository.CommentRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,7 @@ public class CommentService {
     private final PostService postService;
     private final UserService userService;
 
-    public String addComment(Comment comment, Post post, User user){
-        commentRepo.save(comment);
+    public String addComment(Comment comment, Post post, User user) {
 
         post.getComments().add(comment);
         postService.save(post);
@@ -27,12 +26,15 @@ public class CommentService {
         user.getComments().add(comment);
         userService.saveUser(user);
 
+        commentRepo.save(comment);
+
+
         return "comment added";
     }
 
-    public User user(Comment comment){
-        for(User user : userService.allUsers()){
-            if(user.getComments().contains(comment)){
+    public User user(Comment comment) {
+        for (User user : userService.allUsers()) {
+            if (user.getComments().contains(comment)) {
                 return user;
             }
         }
@@ -40,19 +42,19 @@ public class CommentService {
         return userService.findUser(1L).get();
     }
 
-    public void delete(Comment comment){
+    public void delete(Comment comment) {
         commentRepo.delete(comment);
         log.info("comment deleted");
     }
 
-    public Comment getById(Long id){
-        if(commentRepo.findById(id).isPresent()){
+    public Comment getById(Long id) {
+        if (commentRepo.findById(id).isPresent()) {
             return commentRepo.findById(id).get();
         }
         return null;
     }
 
-    public void save(Comment comment){
+    public void save(Comment comment) {
         commentRepo.save(comment);
     }
 

@@ -22,6 +22,9 @@ public class AuthorsValidator implements ConstraintValidator<AuthorsConstraint, 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
 
+        if(s.replaceAll("\\s+", "").equals("")){
+            return true;
+        }
         List<String> authors = Arrays.asList(s.split(","));
         authors = authors
                 .stream()

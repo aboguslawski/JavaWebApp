@@ -218,3 +218,7 @@ select User a where a.id = 1 [42122-200]
 org.h2.jdbc.JdbcSQLDataException: Wartość za długa dla kolumny "USER VARBINARY(255)": "X'aced000573720025636f6d2e61626f6775736c6177736b692e626c6f672e6d6f64656c2e757365722e55736572b2e2584b89c1d88a0200094c0008636f6d6d... (1165)"
 Value too long for column "USER VARBINARY(255)": "X'aced000573720025636f6d2e61626f6775736c6177736b692e626c6f672e6d6f64656c2e757365722e55736572b2e2584b89c1d88a0200094c0008636f6d6d... (1165)"; SQL statement:
 insert into comment (content, publicated_at, user, id) values (?, ?, ?, ?) [22001-200]
+2021-01-28 23:19:08 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Wartość za długa dla kolumny "CONTENT VARCHAR(255)": "'Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucib... (296)"
+Value too long for column "CONTENT VARCHAR(255)": "'Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucib... (296)"; SQL statement:
+insert into post (content, publicated_at, title, id) values (?, ?, ?, ?) [22001-200]

@@ -41,7 +41,7 @@ public class Post implements Comparable<Post> {
     )
     private List<User> users;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 

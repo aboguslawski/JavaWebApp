@@ -43,4 +43,5 @@ public class PostDTO {
                 .map(a -> a.replaceAll("\\s+", ""))
                 .collect(Collectors.toList());
     }
+
 }

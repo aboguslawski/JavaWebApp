@@ -52,7 +52,9 @@ public class NewPostController {
                 .stream()
                 .map(userService::findByEmail)
                 .collect(Collectors.toList());
-        users.add(userService.currentUser());
+        if(!userService.isAdmin()){
+            users.add(userService.currentUser());
+        }
 
         List<Tag> tags = postDTO.getTagsList()
                 .stream()
