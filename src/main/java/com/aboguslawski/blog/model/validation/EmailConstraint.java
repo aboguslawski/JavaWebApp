@@ -1,4 +1,4 @@
-package com.aboguslawski.blog.email;
+package com.aboguslawski.blog.model.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

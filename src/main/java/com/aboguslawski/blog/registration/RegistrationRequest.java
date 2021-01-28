@@ -1,6 +1,7 @@
 package com.aboguslawski.blog.registration;
 
-import com.aboguslawski.blog.email.EmailConstraint;
+import com.aboguslawski.blog.model.validation.EmailConstraint;
+import com.aboguslawski.blog.model.validation.PasswordConstraint;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ public class RegistrationRequest {
     @NotNull(message = "required")
     @Size(min = 6, message = "at least 6 characters")
     @Size(max = 15, message = "no more than 15 characters")
+    @PasswordConstraint
     private String password;
 
     @NotNull(message = "required")

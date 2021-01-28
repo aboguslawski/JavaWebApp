@@ -1,4 +1,7 @@
-package com.aboguslawski.blog.email;
+package com.aboguslawski.blog.model.validation;
+
+import com.aboguslawski.blog.email.EmailValidator;
+import com.aboguslawski.blog.model.validation.EmailConstraint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
