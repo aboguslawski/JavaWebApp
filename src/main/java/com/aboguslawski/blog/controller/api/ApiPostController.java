@@ -2,8 +2,10 @@ package com.aboguslawski.blog.controller.api;
 
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.dto.PostDTO;
+import com.aboguslawski.blog.model.entity.Tag;
 import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.service.TagService;
 import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ public class ApiPostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final TagService tagService;
 
     @GetMapping("/all")
     public Iterable<Post> getAll() {
@@ -39,7 +42,12 @@ public class ApiPostController {
 
         Post p = new Post(postDTO.getTitle(), postDTO.getContent());
 
-        postService.addPost(p, users);
+        List<Tag> tags = postDTO.getTagsList()
+                .stream()
+                .map(tagService::use)
+                .collect(Collectors.toList());
+
+        postService.addPost(p, users, tags);
 
         return true;
     }

@@ -2,8 +2,10 @@ package com.aboguslawski.blog.controller;
 
 import com.aboguslawski.blog.model.dto.PostDTO;
 import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.entity.Tag;
 import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
+import com.aboguslawski.blog.model.service.TagService;
 import com.aboguslawski.blog.model.service.UserService;
 import com.aboguslawski.blog.util.Mappings;
 import com.aboguslawski.blog.util.ViewNames;
@@ -27,12 +29,13 @@ public class NewPostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final TagService tagService;
 
     @GetMapping(Mappings.NEW_POST)
     public String newPost(Model model) {
 //        model.addAttribute("postService", postService);
 //        model.addAttribute("userService", userService);
-        model.addAttribute("postDTO", new PostDTO("", "", ""));
+        model.addAttribute("postDTO", new PostDTO("", "", "", ""));
 
 
         return ViewNames.NEW_POST;
@@ -51,11 +54,16 @@ public class NewPostController {
                 .collect(Collectors.toList());
         users.add(userService.currentUser());
 
+        List<Tag> tags = postDTO.getTagsList()
+                .stream()
+                .map(tagService::use)
+                .collect(Collectors.toList());
+
         log.info(users.toString());
 
         Post p = new Post(postDTO.getTitle(), postDTO.getContent());
 
-        postService.addPost(p, users);
+        postService.addPost(p, users, tags);
 
 //        Post p = new Post(post.getTitle(), post.getContent());
 //        User user = userService.currentUser();

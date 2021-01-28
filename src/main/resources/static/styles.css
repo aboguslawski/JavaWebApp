@@ -12,6 +12,11 @@ a {
     color: #ffffcc;
 }
 
+.title{
+    color: #66ccff;
+    font-weight: bold;
+}
+
 a:hover{
     color:pink;
 }

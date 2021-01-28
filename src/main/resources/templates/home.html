@@ -51,6 +51,9 @@
 
     <ul th:each="post : ${posts}">
         <p th:text="${post.publication()}"></p>
+        <span th:each="tag : ${post.getTags()}">
+            <a>#</a><a th:text="${tag.tag}"></a>
+        </span>
         <div class="row">
             <div class="col-md-2">
                 <div class="box" align="left">
@@ -62,7 +65,9 @@
             </div>
             <div class="col-md-9">
                 <div class="box">
-                    <a th:text="${post.title}">content</a>
+                    <span th:text="${post.title}" class="title">title</span>
+                    <br>
+                    <span th:text="${post.content}">content</span>
                 </div>
             </div>
             <div align="center" class="col-md-1">

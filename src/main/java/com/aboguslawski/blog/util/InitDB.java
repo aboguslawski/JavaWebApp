@@ -1,11 +1,13 @@
 package com.aboguslawski.blog.util;
 
+import com.aboguslawski.blog.model.dto.TagDTO;
 import com.aboguslawski.blog.model.entity.Comment;
 import com.aboguslawski.blog.model.service.CommentService;
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
 import com.aboguslawski.blog.model.entity.UserRole;
+import com.aboguslawski.blog.model.service.TagService;
 import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ public class InitDB {
     private final UserService userService;
     private final PostService postService;
     private final CommentService commentService;
+    private final TagService tagService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDatabase() {
@@ -90,6 +93,12 @@ public class InitDB {
         Comment comment1 = new Comment("comment1");
 
         commentService.addComment(comment1, post1, first);
+
+        TagDTO tagDTO = new TagDTO("chess", post1.getId());
+        TagDTO tagDTO2 = new TagDTO("test", post1.getId());
+
+        tagService.addToPost(tagDTO);
+        tagService.addToPost(tagDTO2);
 
     }
 }

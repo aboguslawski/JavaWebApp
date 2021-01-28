@@ -1,6 +1,7 @@
 package com.aboguslawski.blog.model.service;
 
 import com.aboguslawski.blog.model.entity.Post;
+import com.aboguslawski.blog.model.entity.Tag;
 import com.aboguslawski.blog.model.repository.PostRepo;
 import com.aboguslawski.blog.model.entity.User;
 import lombok.AllArgsConstructor;
@@ -25,12 +26,22 @@ public class PostService {
 
     private final UserService userService;
 
-    private static boolean ascending = false;
+    private static boolean ascending = true;
 
     public String save(Post post) {
         postRepo.save(post);
 
         return "post saved to repository";
+    }
+
+    public String addPost(Post post, List<User> authors, List<Tag> tags) {
+        postRepo.save(post);
+
+        post.getUsers().addAll(authors);
+        post.getTags().addAll(tags);
+        postRepo.save(post);
+
+        return "post added";
     }
 
     public String addPost(Post post, List<User> authors) {
@@ -104,6 +115,11 @@ public class PostService {
         }
 
         return result;
+    }
+
+    public boolean postOf(Post post, String email){
+
+        return post.getUsers().toString().contains(email);
     }
 
 }

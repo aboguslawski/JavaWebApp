@@ -49,6 +49,14 @@
             </span>
     <br/>
 
+    <label>tags:</label>
+    <input type="text" th:field="*{tags}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('tags')}"
+          th:errors="*{tags}">tags error
+            </span>
+    <br/>
+
     <input type="submit" value="register"/>
     <input type="reset" value="reset"/>
     <!--    </div>-->
