@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
@@ -13,32 +13,45 @@
 
 </head>
 <body>
-<div th:insert="fragments/general.html" :: header></div>
+<!--<div th:insert="fragments/general.html" :: header></div>-->
 
-<form action="#" th:action="@{/new_post}" th:object="${post}" method="post">
-    <div class="pd">
+<form method="POST" th:action="@{/new_post}" th:object="${postDTO}">
+    <!--    <div class="pd">-->
 
-        <div th:if="${#fields.hasErrors()}">
-            <span class="validationError">
-                Please correct errors and resubmit
-            </span>
-        </div>
-
-        <p>title: <textarea th:field="*{title}"></textarea></p>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('title')}"
-              th:errors="*{title}">title error</span>
-
-        <p>content: <textarea th:field="*{content}"></textarea></p>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('content')}"
-              th:errors="*{content}">title error</span>
-
-        <p>
-            <input type="submit" value="submit"/>
-            <input type="reset" value="reset"/>
-        </p>
+    <div th:if="${#fields.hasErrors()}">
+                <span class="validationError">
+                    Please correct errors and resubmit
+                </span>
     </div>
+    <br/>
+
+    <label>title:</label>
+    <input type="text" th:field="*{title}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}">title error
+            </span>
+    <br/>
+
+    <label>content:</label>
+    <input type="text" th:field="*{content}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('content')}"
+          th:errors="*{content}">content error
+            </span>
+    <br/>
+
+    <label>authors:</label>
+    <input type="text" th:field="*{authors}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('authors')}"
+          th:errors="*{authors}">authors error
+            </span>
+    <br/>
+
+    <input type="submit" value="register"/>
+    <input type="reset" value="reset"/>
+    <!--    </div>-->
 </form>
 
 </body>

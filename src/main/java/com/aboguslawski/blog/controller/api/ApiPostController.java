@@ -1,7 +1,7 @@
 package com.aboguslawski.blog.controller.api;
 
 import com.aboguslawski.blog.model.entity.Post;
-import com.aboguslawski.blog.model.dto.PostAuthors;
+import com.aboguslawski.blog.model.dto.PostDTO;
 import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
 import com.aboguslawski.blog.model.service.UserService;
@@ -30,14 +30,14 @@ public class ApiPostController {
     }
 
     @PostMapping
-    public boolean create(@RequestBody PostAuthors postAuthors) {
+    public boolean create(@RequestBody PostDTO postDTO) {
 
-        List<User> users = postAuthors.getAuthors()
+        List<User> users = postDTO.getAuthorsList()
                 .stream()
                 .map(userService::findByEmail)
                 .collect(Collectors.toList());
 
-        Post p = new Post(postAuthors.getTitle(), postAuthors.getContent());
+        Post p = new Post(postDTO.getTitle(), postDTO.getContent());
 
         postService.addPost(p, users);
 

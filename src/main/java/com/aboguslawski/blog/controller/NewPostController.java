@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.controller;
 
+import com.aboguslawski.blog.model.dto.PostDTO;
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -29,35 +30,45 @@ public class NewPostController {
 
     @GetMapping(Mappings.NEW_POST)
     public String newPost(Model model) {
-        model.addAttribute("postService", postService);
-        model.addAttribute("userService", userService);
-        model.addAttribute("post", new Post());
+//        model.addAttribute("postService", postService);
+//        model.addAttribute("userService", userService);
+        model.addAttribute("postDTO", new PostDTO("", "", ""));
 
 
         return ViewNames.NEW_POST;
     }
 
     @PostMapping(Mappings.NEW_POST)
-    public String newPost(@Valid Post post, Errors errors) {
+    public String submitPost(@Valid PostDTO postDTO, Errors errors) {
+
         if (errors.hasErrors()) {
             return ViewNames.NEW_POST;
         }
 
-        log.info(post.getTitle());
-        log.info(post.getContent());
+        List<User> users = postDTO.getAuthorsList()
+                .stream()
+                .map(userService::findByEmail)
+                .collect(Collectors.toList());
+        users.add(userService.currentUser());
 
-        Post p = new Post(post.getTitle(), post.getContent());
-        User user = userService.currentUser();
+        log.info(users.toString());
 
-        List<User> authors = new ArrayList<>();
-        authors.add(user);
+        Post p = new Post(postDTO.getTitle(), postDTO.getContent());
 
+        postService.addPost(p, users);
 
-
-        postService.addPost(p, authors);
-        for(User u : authors){
-            userService.saveUser(u);
-        }
+//        Post p = new Post(post.getTitle(), post.getContent());
+//        User user = userService.currentUser();
+//
+//        List<User> authors = new ArrayList<>();
+//        authors.add(user);
+//
+//
+//
+//        postService.addPost(p, authors);
+//        for(User u : authors){
+//            userService.saveUser(u);
+//        }
 
         //
 

@@ -186,4 +186,8 @@ public class UserService implements UserDetailsService {
         }
         return "user not found";
     }
+
+    public boolean exists(String email){
+        return userRepo.findByEmail(email).isPresent();
+    }
 }
