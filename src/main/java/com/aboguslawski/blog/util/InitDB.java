@@ -29,13 +29,13 @@ public class InitDB {
     @EventListener(ApplicationReadyEvent.class)
     public void fillDatabase() {
 
-        try {
-            openCSVReader.usersData();
-            openCSVReader.postsData();
-//            openCSVReader.commentsData();
-        } catch (IOException e) {
-            log.info("IOException");
-        }
+//        try {
+//            openCSVReader.usersData();
+//            openCSVReader.postsData();
+////            openCSVReader.commentsData();
+//        } catch (IOException e) {
+//            log.info("IOException");
+//        }
 
         User admin = new User(
                 "Adam",
