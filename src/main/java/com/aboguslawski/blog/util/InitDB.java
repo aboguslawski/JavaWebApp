@@ -1,12 +1,9 @@
 package com.aboguslawski.blog.util;
 
-import com.aboguslawski.blog.model.dto.TagDTO;
-import com.aboguslawski.blog.model.entity.Comment;
-import com.aboguslawski.blog.model.service.CommentService;
-import com.aboguslawski.blog.model.entity.Post;
-import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.entity.User;
 import com.aboguslawski.blog.model.entity.UserRole;
+import com.aboguslawski.blog.model.service.CommentService;
+import com.aboguslawski.blog.model.service.PostService;
 import com.aboguslawski.blog.model.service.TagService;
 import com.aboguslawski.blog.model.service.UserService;
 import lombok.AllArgsConstructor;
@@ -16,8 +13,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -34,11 +29,11 @@ public class InitDB {
     @EventListener(ApplicationReadyEvent.class)
     public void fillDatabase() {
 
-        try{
+        try {
             openCSVReader.usersData();
             openCSVReader.postsData();
 //            openCSVReader.commentsData();
-        } catch (IOException e){
+        } catch (IOException e) {
             log.info("IOException");
         }
 

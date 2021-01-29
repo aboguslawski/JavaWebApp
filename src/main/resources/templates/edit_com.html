@@ -11,30 +11,38 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
-<div th:insert="fragments/general.html" :: header></div>
+<div class="field left">
 
-<form action="#" th:action="@{/edit_comment}" th:object="${comment}" method="post">
-    <div class="pd">
+    <div th:insert="fragments/general.html"></div>
+</div>
 
-        <div th:if="${#fields.hasErrors()}">
+<div class="field right">
+    <form action="#" th:action="@{/edit_comment}" th:object="${comment}" method="post">
+
+
+        <div class="pd">
+
+            <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Please correct errors and resubmit
             </span>
+            </div>
+
+            <input type="hidden" th:name="id" th:value="${comment.id}"/>
+
+            <p>content: <textarea th:field="*{content}"></textarea></p>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('content')}"
+                  th:errors="*{content}">title error</span>
+
+            <p>
+                <input type="submit" value="submit"/>
+                <input type="reset" value="reset"/>
+            </p>
         </div>
+    </form>
+</div>
 
-        <input type="hidden" th:name="id" th:value="${comment.id}"/>
-
-        <p>content: <textarea th:field="*{content}"></textarea></p>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('content')}"
-              th:errors="*{content}">title error</span>
-
-        <p>
-            <input type="submit" value="submit"/>
-            <input type="reset" value="reset"/>
-        </p>
-    </div>
-</form>
 
 
 

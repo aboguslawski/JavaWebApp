@@ -117,7 +117,7 @@ public class OpenCSVReader {
         csvReader.readNext();
 
         while ((nextRecord = csvReader.readNext()) != null) {
-            authorId = Long.parseLong(nextRecord[0]);
+//            authorId = Long.parseLong(nextRecord[0]);
             postId = Long.parseLong(nextRecord[1]);
             content = nextRecord[2];
 
@@ -129,11 +129,11 @@ public class OpenCSVReader {
                 content = content.substring(0, 200);
             }
 
-            User user = userService.findUser(authorId).get();
+//            User user = userService.findUser(authorId).get();
             Post post = postService.getById(postId);
             Comment comment = new Comment(content);
 
-            commentService.addComment(comment, post, user);
+            commentService.addComment(comment, post);
         }
     }
 

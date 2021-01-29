@@ -32,6 +32,14 @@ public class CommentService {
         return "comment added";
     }
 
+    public String addComment(Comment comment, Post post){
+        post.getComments().add(comment);
+        postService.save(post);
+        commentRepo.save(comment);
+
+        return "comment added - anonymous user";
+    }
+
     public User user(Comment comment) {
         for (User user : userService.allUsers()) {
             if (user.getComments().contains(comment)) {
@@ -40,6 +48,16 @@ public class CommentService {
         }
 
         return userService.findUser(1L).get();
+    }
+
+    public String username(Comment comment) {
+        for (User user : userService.allUsers()) {
+            if (user.getComments().contains(comment)) {
+                return user.nickname();
+            }
+        }
+
+        return "anonymous user";
     }
 
     public void delete(Comment comment) {

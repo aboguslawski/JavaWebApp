@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <form th:if="${userService.currentUserName() != 'anonymousUser'}" action="#" th:action="@{/post}" th:object="${comment}" method="post">
+    <form action="#" th:action="@{/post}" th:object="${comment}" method="post">
         <div class="pd">
 
             <div th:if="${#fields.hasErrors()}">
@@ -113,8 +113,7 @@
         <div class="row">
             <p class="date" th:text="${comment.publication()}"></p>
             <div class="col-md-10 com">
-                <p><a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${commentService.user(comment).id})}"
-                   th:text="${commentService.user(comment)}"></a></p>
+                <p><a th:text="${commentService.username(comment)}"></a></p>
                 <a th:text="${comment.content}"></a>
             </div>
             <div th:if="${userService.currentUserName() == commentService.user(comment).email || userService.isAdmin()}"

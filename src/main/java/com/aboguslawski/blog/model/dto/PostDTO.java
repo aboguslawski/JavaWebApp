@@ -1,6 +1,5 @@
 package com.aboguslawski.blog.model.dto;
 
-import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.validation.AuthorsConstraint;
 import lombok.*;
 
@@ -37,7 +36,7 @@ public class PostDTO {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getTagsList(){
+    public List<String> getTagsList() {
         return Arrays.asList(tags.split(","))
                 .stream()
                 .map(a -> a.replaceAll("\\s+", ""))

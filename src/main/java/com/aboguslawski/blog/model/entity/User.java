@@ -97,6 +97,10 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return email;
+        return nickname();
+    }
+
+    public String nickname(){
+        return this.firstName.substring(0, 1).toLowerCase() + this.lastName.toLowerCase();
     }
 }

@@ -1,46 +1,58 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles">
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
 
 <div th:fragment="header">
-    <div  class="hd col-md-12">
 
-        <div class="pd">
-            <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__}">Home</a>
+        <div class="centered">
+            <p></p>
+            <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).HOME}__}">Home</a>
+            <p></p>
 
-            <span>
+            <span th:if="${userService.currentUserName() != 'anonymousUser'}">
+                <p></p>
 <!--                        /my_posts-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${userService.currentUser().id})}"
-                           th:text="${userService.currentUserName()}">my posts</a>
-                    </span>
+                <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${userService.currentUser().id})}"
+                           th:text="${userService.nickname()}">my posts</a>
+                <p></p>
+            </span>
 
-            <span>
+            <span th:if="${userService.currentUserName() != 'anonymousUser'}">
+                <p></p>
 <!--                        /new_post-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
-                    </span>
+                <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).NEW_POST}__}">new post</a>
+                <p></p>
+            </span>
 
-            <span>
+            <span th:if="${userService.currentUserName() != 'anonymousUser'}">
+                <p></p>
 <!--                        /logout-->
-                        <a th:if="${userService.currentUserName() != 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
-                    </span>
+                <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGOUT}__}">logout</a>
+                <p></p>
+            </span>
 
-            <span>
+            <span th:if="${userService.currentUserName() == 'anonymousUser'}">
+                <p></p>
 <!--                        /login-->
-                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
+                <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).LOGIN}__}">log in</a>
+                <p></p>
                 <!--                        /register-->
-                        <a th:if="${userService.currentUserName() == 'anonymousUser'}"
-                           th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
-                    </span>
+                <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).REGISTER}__}">sign up</a>
+                <p></p>
+            </span>
+
+            <span th:if="${userService.isAdmin()}">
+                <p></p>
+                <a class="pd">export data</a>
+                <p></p>
+                <a class="pd">export data</a>
+                <p></p>
+            </span>
         </div>
-    </div>
 </div>
 
 </body>

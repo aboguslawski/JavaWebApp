@@ -16,6 +16,8 @@ public final class Mappings {
     public static final String EDIT_POST = "/edit_post";
     public static final String DELETE_COMMENT = "/delete_comment";
     public static final String EDIT_COMMENT = "/edit_comment";
+    public static final String IMPORT_DATA = "/import";
+    public static final String EXPORT_DATA = "/export";
 
     public static final String VIEW_POST = "viewPost";
     public static final String SEARCH = "search";

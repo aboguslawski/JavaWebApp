@@ -15,10 +15,24 @@
             </th:block> /*/-->
 </head>
 <body>
-<div>
 
-    <div th:insert="fragments/general.html" :: header></div>
+    <div class="field left">
 
+        <div th:insert="fragments/general.html"></div>
+
+        <div>
+            <form action="#" th:action="@{/search}" th:object="${post}" method="post">
+
+                <a>User: <input type="text" th:field="*{title}"/> </a>
+                <a>Content: <input type="text" th:field="*{content}"/> </a>
+                <a><input type="submit" value="search"/> </a>
+                <p>
+                    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).SORT}__}">sort by date</a>
+                </p>
+            </form>
+        </div>
+
+    </div>
     <!--<div class="col-md-8">
         <form action="#" th:action="@{/search}" th:object="${oldPost}" method="oldPost">
             <div class="pd">
@@ -38,49 +52,51 @@
         </form>
     </div>
 </div>-->
+    <div class="field right">
+<!--        <div class="box">-->
+<!--            <form action="#" th:action="@{/search}" th:object="${post}" method="post">-->
+<!--                <a>User: <input type="text" th:field="*{title}"/> </a>-->
+<!--                <a>Content: <input type="text" th:field="*{content}"/> </a>-->
+<!--                <a><input type="submit" value="search"/> </a>-->
+<!--                <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).SORT}__}">sort by date</a>-->
+<!--            </form>-->
+<!--        </div>-->
 
-    <div class="box">
-        <form action="#" th:action="@{/search}" th:object="${post}" method="post">
-            <a>User: <input type="text" th:field="*{title}"/> </a>
-            <a>Content: <input type="text" th:field="*{content}"/> </a>
-            <a><input type="submit" value="search"/> </a>
-            <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).SORT}__}">sort by date</a>
-        </form>
-    </div>
 
-
-    <ul th:each="post : ${posts}">
-        <p th:text="${post.publication()}"></p>
-        <span th:each="tag : ${post.getTags()}">
+        <ul th:each="post : ${posts}">
+            <p th:text="${post.publication()}"></p>
+            <span th:each="tag : ${post.getTags()}">
             <a>#</a><a th:text="${tag.tag}"></a>
         </span>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="box" align="left">
-                    <ul th:each="user : ${post.getUsers()}">
-                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${user.id})}"
-                           th:text="${user.email}"></a>
-                    </ul>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="box" align="left">
+                        <ul th:each="user : ${post.getUsers()}">
+                            <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${user.id})}"
+                               th:text="${user.nickname()}"></a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="box">
+                        <span th:text="${post.title}" class="title">title</span>
+                        <br>
+                        <span th:text="${post.content}">content</span>
+                    </div>
+                </div>
+                <div align="center" class="col-md-1">
+                    <div class="box">
+                        <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).POST}__(id=${post.id})}"
+                           th:text="view">
+                            view oldPost
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="box">
-                    <span th:text="${post.title}" class="title">title</span>
-                    <br>
-                    <span th:text="${post.content}">content</span>
-                </div>
-            </div>
-            <div align="center" class="col-md-1">
-                <div class="box">
-                    <a th:href="@{__${T(com.aboguslawski.blog.util.Mappings).POST}__(id=${post.id})}"
-                       th:text="view">
-                        view oldPost
-                    </a>
-                </div>
-            </div>
-        </div>
-    </ul>
-</div>
+        </ul>
+    </div>
+    </div>
+
 
 </body>
 </html>

@@ -3,6 +3,38 @@
     color: #ffffcc;
 }
 
+.field {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left * {
+  background-color: #353723;
+}
+
+.left{
+  background-color: #353723;
+  width: 10%;
+  left: 0;
+}
+
+.right{
+    width: 90%;
+    right: 0;
+}
+
+.centered {
+  position: absolute;
+  top:80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 .date {
     margin:6px;
     padding:6px;

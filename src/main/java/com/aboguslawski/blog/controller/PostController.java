@@ -32,7 +32,7 @@ public class PostController {
     public String post(@RequestParam Long id, Model model){
         Post post = postService.getById(id);
 
-        log.info(post.getComments().size() + " comments");
+//        log.info(post.getComments().size() + " comments");
 
         model.addAttribute("comment", new Comment());
         model.addAttribute("post", post);
@@ -52,9 +52,12 @@ public class PostController {
 
         Post post = postService.getById(comment.getId());
         Comment c = new Comment(comment.getContent());
-        User user = userService.currentUser();
-
-        commentService.addComment(c, post, user);
+        if(userService.currentUserName().equals("anonymousUser")){
+            commentService.addComment(c, post);
+        }else{
+            User user = userService.currentUser();
+            commentService.addComment(c, post, user);
+        }
 
 
         return "redirect:/" + ViewNames.POST + "?id=" + post.getId();
