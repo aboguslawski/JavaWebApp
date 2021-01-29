@@ -17,7 +17,7 @@
                 <p></p>
 <!--                        /my_posts-->
                 <a class="pd" th:href="@{__${T(com.aboguslawski.blog.util.Mappings).USER}__(id=${userService.currentUser().id})}"
-                           th:text="${userService.nickname()}">my posts</a>
+                           th:text="${userService.currentUser().nickname()}">my posts</a>
                 <p></p>
             </span>
 

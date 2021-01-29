@@ -13,54 +13,56 @@
 
 </head>
 <body>
-<!--<div th:insert="fragments/general.html" :: header></div>-->
 
-<form method="POST" th:action="@{/new_post}" th:object="${postDTO}">
-    <!--    <div class="pd">-->
+<div class="field right">
+    <form method="POST" th:action="@{/new_post}" th:object="${postDTO}">
+        <!--    <div class="pd">-->
 
-    <div th:if="${#fields.hasErrors()}">
+        <div th:if="${#fields.hasErrors()}">
                 <span class="validationError">
                     Please correct errors and resubmit
                 </span>
-    </div>
-    <br/>
+        </div>
+        <br/>
 
-    <label>title:</label>
-    <input type="text" th:field="*{title}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('title')}"
-          th:errors="*{title}">title error
+        <label>title:</label>
+        <input type="text" th:field="*{title}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('title')}"
+              th:errors="*{title}">title error
             </span>
-    <br/>
+        <br/>
 
-    <label>content:</label>
-    <input type="text" th:field="*{content}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('content')}"
-          th:errors="*{content}">content error
+        <label>content:</label>
+        <input type="text" th:field="*{content}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}">content error
             </span>
-    <br/>
+        <br/>
 
-    <label>authors:</label>
-    <input type="text" th:field="*{authors}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('authors')}"
-          th:errors="*{authors}">authors error
+        <label>authors:</label>
+        <input type="text" th:field="*{authors}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('authors')}"
+              th:errors="*{authors}">authors error
             </span>
-    <br/>
+        <br/>
 
-    <label>tags:</label>
-    <input type="text" th:field="*{tags}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('tags')}"
-          th:errors="*{tags}">tags error
+        <label>tags:</label>
+        <input type="text" th:field="*{tags}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('tags')}"
+              th:errors="*{tags}">tags error
             </span>
-    <br/>
+        <br/>
 
-    <input type="submit" value="register"/>
-    <input type="reset" value="reset"/>
-    <!--    </div>-->
-</form>
+        <input type="submit" value="register"/>
+        <input type="reset" value="reset"/>
+        <!--    </div>-->
+    </form>
+</div>
+
 
 </body>
 </html>

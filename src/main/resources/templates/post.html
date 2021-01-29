@@ -15,10 +15,10 @@
             </th:block> /*/-->
 </head>
 <body>
-<div>
+<div class="field left">
 
     <div th:insert="fragments/general.html" :: header></div>
-
+</div>
     <!--<div class="col-md-8">
         <form action="#" th:action="@{/search}" th:object="${oldPost}" method="oldPost">
             <div class="pd">
@@ -48,7 +48,7 @@
     <!--        </form>-->
     <!--    </div>-->
 
-
+<div class="field right">
     <!--    <ul th:each="post : ${posts}">-->
     <p class="date" th:text="${post.publication()}"></p>
     <div class="row">

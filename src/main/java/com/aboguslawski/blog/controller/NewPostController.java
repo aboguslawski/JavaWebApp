@@ -33,9 +33,8 @@ public class NewPostController {
 
     @GetMapping(Mappings.NEW_POST)
     public String newPost(Model model) {
-//        model.addAttribute("postService", postService);
-//        model.addAttribute("userService", userService);
         model.addAttribute("postDTO", new PostDTO("", "", "", ""));
+        model.addAttribute("userService", userService);
 
 
         return ViewNames.NEW_POST;
