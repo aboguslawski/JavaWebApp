@@ -32,6 +32,10 @@ public class Comment {
 
     private LocalDateTime publicatedAt;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comment(String content) {
         this.content = content;
         this.publicatedAt = LocalDateTime.now();

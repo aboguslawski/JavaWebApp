@@ -97,7 +97,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return nickname();
+        return email;
     }
 
     public String nickname(){

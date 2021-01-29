@@ -56,7 +56,9 @@ public class PostController {
             commentService.addComment(c, post);
         }else{
             User user = userService.currentUser();
+            log.info("comment of " + user.getEmail());
             commentService.addComment(c, post, user);
+//            log.info(user.getEmail() + " comments size : " + user.getComments().size());
         }
 
 

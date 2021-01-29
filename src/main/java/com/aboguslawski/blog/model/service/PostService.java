@@ -119,8 +119,8 @@ public class PostService {
     }
 
     public boolean postOf(Post post, String email){
-
-        return post.getUsers().toString().contains(email);
+        log.info(post.getUsers().stream().map(User::getEmail).collect(Collectors.joining()));
+        return post.getUsers().stream().map(User::getEmail).collect(Collectors.joining()).contains(email);
     }
 
 }

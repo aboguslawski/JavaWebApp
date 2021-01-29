@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -18,6 +20,7 @@ public class CommentService {
     private final UserService userService;
 
     public String addComment(Comment comment, Post post, User user) {
+        comment.setUser(user);
 
         post.getComments().add(comment);
         postService.save(post);
@@ -51,16 +54,25 @@ public class CommentService {
     }
 
     public String username(Comment comment) {
-        for (User user : userService.allUsers()) {
-            if (user.getComments().contains(comment)) {
-                return user.nickname();
-            }
+        if(comment.getUser() != null){
+            return comment.getUser().nickname();
         }
 
         return "anonymous user";
     }
 
+    public boolean commentOf(Comment comment, String email){
+        for(User user : userService.allUsers()){
+            if(user.getComments().contains(comment)){
+                log.info("found comment");
+            }
+        }
+        return true;
+    }
+
     public void delete(Comment comment) {
+        comment.getUser().getComments().remove(comment);
+        userService.saveUser(comment.getUser());
         commentRepo.delete(comment);
         log.info("comment deleted");
     }

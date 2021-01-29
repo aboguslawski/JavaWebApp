@@ -127,7 +127,7 @@ public class UserService implements UserDetailsService {
 
     public void saveUser(User user) {
         userRepo.save(user);
-        enableUser(user.getEmail());
+//        enableUser(user.getEmail());
     }
 
     public void disableUser(String email) {
