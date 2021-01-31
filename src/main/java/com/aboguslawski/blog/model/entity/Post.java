@@ -45,7 +45,7 @@ public class Post implements Comparable<Post> {
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private List<Tag> tags;
 

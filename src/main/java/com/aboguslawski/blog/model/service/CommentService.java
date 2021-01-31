@@ -1,5 +1,6 @@
 package com.aboguslawski.blog.model.service;
 
+import com.aboguslawski.blog.model.dto.CommentDTO;
 import com.aboguslawski.blog.model.entity.Comment;
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.entity.User;
@@ -8,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,6 +93,29 @@ public class CommentService {
 
     public Iterable<Comment> allComments() {
         return commentRepo.findAll();
+    }
+
+    public CommentDTO mapToDTO(Comment comment){
+
+        Long id = comment.getId();
+        Long postId = 1L;
+        String content = comment.getContent();
+        LocalDateTime publicatedAt = comment.getPublicatedAt();
+        String user = comment.getUser().getEmail();
+
+        CommentDTO result = new CommentDTO(id, postId, content, publicatedAt, user);
+
+        return result;
+    }
+
+    public boolean exists(Comment comment){
+        for(Post p : postService.allPosts()){
+            if(p.getComments().contains(comment)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

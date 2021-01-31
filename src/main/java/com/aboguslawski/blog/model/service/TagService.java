@@ -8,8 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -73,14 +75,19 @@ public class TagService {
     }
 
     public String addToPost(TagDTO tagDTO) {
-        Tag tag = use(tagDTO.getTag());
+        List<Tag> tags =  Arrays.asList(tagDTO.getTag().split(","))
+            .stream()
+            .map(a -> a.replaceAll("\\s+", ""))
+            .map(this::use)
+            .collect(Collectors.toList());
 
         Post post = postService.getById(tagDTO.getPost());
 
-        post.getTags().add(tag);
+        post.getTags().addAll(tags);
+        post.setTags(post.getTags().stream().distinct().collect(Collectors.toList()));
         postService.save(post);
 
-        String msg = "added tag " + tag.getTag() + " to post " + post.getId();
+        String msg = "added tags " + tags.toString() + " to post " + post.getId();
         log.info(msg);
         return msg;
     }

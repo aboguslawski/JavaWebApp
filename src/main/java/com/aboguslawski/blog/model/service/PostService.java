@@ -1,5 +1,7 @@
 package com.aboguslawski.blog.model.service;
 
+import com.aboguslawski.blog.model.dto.PostDTO;
+import com.aboguslawski.blog.model.entity.Comment;
 import com.aboguslawski.blog.model.entity.Post;
 import com.aboguslawski.blog.model.entity.Tag;
 import com.aboguslawski.blog.model.repository.PostRepo;
@@ -54,7 +56,7 @@ public class PostService {
         return "post added";
     }
 
-    public Iterable<Post> allPosts() {
+    public List<Post> allPosts() {
         return postRepo.findAll();
     }
 
@@ -121,6 +123,30 @@ public class PostService {
     public boolean postOf(Post post, String email){
         log.info(post.getUsers().stream().map(User::getEmail).collect(Collectors.joining()));
         return post.getUsers().stream().map(User::getEmail).collect(Collectors.joining()).contains(email);
+    }
+
+    public Post getByComment(Comment comment){
+        for(Post post : postRepo.findAll()){
+            if(post.getComments().contains(comment)){
+                return post;
+            }
+        }
+
+        return null;
+    }
+
+    public PostDTO mapToDTO(Post post){
+        List<String> emails = post.getUsers()
+                .stream()
+                .map(User::getEmail)
+                .collect(Collectors.toList());
+
+        String authors = String.join(",", emails);
+        String tags =  post.getTags().stream().map(Tag::getTag).collect(Collectors.joining(","));
+
+        PostDTO result = new PostDTO(post.getTitle(), post.getContent(), authors, tags);
+
+        return result;
     }
 
 }
